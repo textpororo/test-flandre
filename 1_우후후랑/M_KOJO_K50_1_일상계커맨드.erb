@@ -675,14 +675,10 @@ IF LOCAL
 				PRINTFORMDW 그게 하필 플랑이라서 문제였던 것 아닐까.
 		ENDSELECT
 	ELSE
-		;서브 스토리 2
-		IF GETBIT(CFLAG:1713, 2) 
-			PRINTFORML 「
-			
 		;특정 이벤트 이후 주회차시에 나오는 구상, 히든루트(보류중)
-		ELSEIF CFLAG:1700 == -2
-			PRINTFORMDL 현재 나오는 구상은 아직 미개발인 상태입니다.
-			PRINTFORMDL 만일 이 글이 출력된다면 꼭 버그 제보를 해주세요.
+		;ELSEIF 
+			;PRINTFORMDL 현재 나오는 구상은 아직 미개발인 상태입니다.
+			;PRINTFORMDL 만일 이 글이 출력된다면 꼭 버그 제보를 해주세요.
 		;그 이외
 		ELSE
 			SELECTCASE RAND:11
@@ -2756,7 +2752,8 @@ IF LOCAL
 			ELSE
 				IF TALENT:연인
 					PRINTFORML 「으음, 뭐어…… 여러 가지 있는데 뭘 들려줄까?」
-					CALL ASK_M("잡다한 이야기", 1, "야한 얘기", EXP:이상경험 >= 1 || MARK:고통각인 >= 1, "호칭에 대해서(미작동)", EXP:애정경험 > 9999, "앞으로 서로 어떡할지" , EXP:데이트경험 >= 100 && !EXP:출산경험)
+					$ASK_TO_FLANDRE
+					CALL ASK_M("잡다한 이야기", 1, "야한 얘기", EXP:이상경험 >= 1 || MARK:고통각인 >= 1, "호칭에 대해서(미작동)", EXP:애정경험 > 9999, "앞으로 서로 어떡할지" , EXP:데이트경험 >= 100 && !EXP:출산경험, "아무 것도 아니야", 1)
 					SELECTCASE RESULT
 					CASE 0
 						IF CFLAG:1601 == 0
@@ -2826,7 +2823,7 @@ IF LOCAL
 							PRINTFORMW 「언니하고, 이따금 이야기해봤는데」
 							PRINTFORML 『그거 정말 보잘 것 없는 생각이구나』
 							PRINTFORMW 「하곤 웃더라.」
-							PRINTFORML 「이번만큼은 \'역시 이새끼 죽여 버릴까\' 싶었는데」
+							PRINTFORML 「이번만큼은 \'역시 이 새끼 죽여 버릴까\' 싶었는데」
 							PRINTFORMW 「……비교적, 납득할만한 얘기를 하더라.」
 							PRINTL
 							PRINTFORMW 『지금까지 인간관계가 거의 없던 너는 몰랐을 테지만, 우선 현실은 그 말대로 딱 들어맞았던 경우같은 건 없단다.』
@@ -2834,13 +2831,13 @@ IF LOCAL
 							PRINTW
 							PRINTFORML 「그렇기에, 응. 나는, %CALLNAME:MASTER%에게 사랑받지 않는게 무서워서, 정답같은 걸 찾고있었을 뿐이라는 걸 알았어.」
 							PRINTFORML 「다음부턴 내 매력으로 %마스터를% 꼼짝도 못 하게 해줄 거야.」
-							PRINTFORML 「좀 더 나를 좋아하게 될 테니까, 각오하고 있으라구!」
-							PRINTFORML 「절대로 놓치지 않을 거니까, %CALLNAME:MASTER%%UNICODE(0x2665)%」
+							PRINTFORML 「좀 더 나를 좋아하게 될 테니까, 각오하고 있으라고!」
+							PRINTFORML 「절대로 놓치지 않을 거야, %CALLNAME:MASTER%%UNICODE(0x2665)%」
 						ELSE
 							PRINTFORML 「미안. 이제 얘깃거리는 그 이야기를 끝으로 더는 생각이 안 나」
 							PRINTFORML 「나중에 또 뭔가 고민거리가 있으면, 그 때 알려줄게.」
 							PRINTFORMW 「지금은 다른 주제라면 이야기해줄 수 있을 것 같아.」
-							RESTART
+							GOTO ASK_TO_FLANDRE
 						ENDIF
 					CASE 1
 						PRINTFORML 「……그런 걸 얘기할 땐, 좀 더 무드같은게 있어야 한다고 생각하는데」
@@ -2888,10 +2885,9 @@ IF LOCAL
 									PRINTFORMW 「이 변태, 음란마귀, 로리콘, 바람둥이, 이 이상성욕자 같으니.」
 									PRINTFORMW 「……바보야%UNICODE(0x2665)%」
 								CASE 1
-									PRINTFORML 「……응? 어어, 그래그래」
+									PRINTFORML 「어어, 그래그래」
 									PRINTFORMW 「지금이라도 사과했음 됐지, 으응……」
-									PRINTFORMW 「……그래.」
-									PRINTFORMW 유난히 아쉬워하는 기색의 플랑을 뒤로 하였다……
+									PRINTFORMDW 유난히 아쉬워하는 기색의 플랑을 뒤로 하였다……
 							ENDSELECT
 						CASE 3
 							PRINTFORML 「…이젠 큼직한 아기 행세야?」
@@ -2942,15 +2938,15 @@ IF LOCAL
 						PRINTFORMW 「그래서 %마스터를% 사랑한다 해도…… 가족애를 모르는 나에겐, 말이지」
 						PRINTFORMW 「%CALLNAME:MASTER% 이외의 가족에게, 나, 나는……」
 						PRINTW
-						PRINTFORMW 「……나도 사랑해줄 수 있는 걸까」
+						PRINTFORMW 「……나도 사랑해줄 수 있는 걸까?」
 						CALL ASK_M("사랑해줄 수 있다", EXP:애정경험 >= 50 && !TALENT:임신소망 && !TALENT:임신, "・・・", 1)
 						SELECTCASE RESULT
 						CASE 0
 							PRINTFORMW 「……정말로?」
 							PRINTFORML 「지금으로선 그러지 않고 있지만, 난 사람을 잡아먹는 요괴고」
 							PRINTFORMW 「원래 당신은 잡아먹혀야 할 쪽인 인간인데」
-							PRINTFORMW 「우리 사이의 아이는 이도저도 아니게 돼서…… 분명 나처럼, 배척당할 거야.」
-							PRINTFORMW 「그럼 그 슬픔이 태어난다면, 태어나지 않고 애초부터 슬픔이 없는게 더 낫지 않을까……?」
+							PRINTFORMW 「우리 사이의 아이는 이도저도 아니게 돼서…… 분명 배척당할 거야.」
+							PRINTFORMW 「그럼 그 슬픔이 태어날 거라면, 태어나지 않고 애초부터 슬픔이 없는게 더 낫지 않을까……?」
 							CALL ASK_M("우리가 있다", 1, "・・・", 1)
 							SELECTCASE RESULT
 								CASE 0
@@ -2963,7 +2959,7 @@ IF LOCAL
 									PRINTFORMW 「나, %CALLNAME:MASTER%하고 아이를 가지고 싶어!」
 									TALENT:임신소망 = 1
 								CASE 1
-									PRINTFORML 당신은 결국 그 마지막 말에 답하지 못 했다.
+									PRINTFORMDL 당신은 결국 그 마지막 말에 답하지 못 했다.
 									PRINTFORML 「……그렇지? 어려운 문제니깐 어쩔 수 없지.」
 									PRINTFORML 「이 슬픔이 이어져 또 다른 불행을 만드는 건 싫으니까」
 							ENDSELECT
@@ -2971,12 +2967,13 @@ IF LOCAL
 							PRINTFORML 「……미안. 이상한 얘기였지」
 							PRINTFORMW 「방금 건 그냥 잊어 줘.」
 						ENDSELECT
+					CASE 4
+						PRINTFORML 「그래? 그럼 이번엔, %CALLNAME:MASTER%에 대해서도 더 들려줘!」
 					ENDSELECT
 				ELSEIF TALENT:연모
 				ELSE
 				ENDIF
 			ENDIF
-			;PRINTFORMW 
 		CASE 1
 			;▼놀기［함께 놀기］
 			;※[유치]소유만
@@ -3064,7 +3061,7 @@ IF LOCAL
 	IF TFLAG:193
 		PRINTL
 		PRINTW 옛날옛날에~ 사람들과 놀기 좋아하던 한 아가씨가 있었답니다.
-		PRINTL 그런데? 실수로 어떤 사람을 다치게 해버린 바람에
+		PRINTL 그런데? 실수로 어떤 사람을 다치게 해 버린 바람에
 		PRINTW 무서운 괴물이라면서, 아가씨의 방에 가둬버리고 말았어요.
 		PRINTW 그렇게 그 아가씨는 홀로 외로워하며 긴 시간을 지냈어요.
 		PRINTW 그러던 어느 날, 어느 한 인간이 그 방의 문을 열어줬답니다?
@@ -3076,14 +3073,15 @@ IF LOCAL
 		PRINTFORMW 『……그리워하고 있구나.』
 		PRINTFORML 『아직은 힘들텐데, 너무 무리하지 않아도 돼 플랑.』
 		PRINTFORMW 『하루종일 애 보느라 고생했어. 들어가서 같이 쉬자?』
+		RESETCOLOR
 		PRINTFORMW 「……」
 		PRINTFORMW 「%CALLNAME:MASTER%하고 약속했어.」
 		PRINTFORMW 「%마스터가% 알려준 따스함과 사랑을 잊지 않겠다고」
 		PRINTFORMW 「그리고, 다른 이들에게도 사랑을 베풀어주겠다고」
 		PRINTW
 		PRINTL
-		PRINTFORMW 「……절대 못해!」
-		PRINTFORMW 「난 그런 거 절대로 못 한단 말이야!!」
+		PRINTFORMW 「……절대 못해!!」
+		PRINTFORMW 「난 그런 거 절대로 못 한단 말이야!」
 		PRINTFORMW 「%마스터가% 없으면 더는 사랑하는 법을 알 수도 없어!」
 		PRINTFORMW 「%마스터가% 없으니 사랑이 뭔지도 잊혀져 가…!」
 		PRINTFORML 「%마스터가% 있어야 난, 나느은……」
@@ -3094,21 +3092,21 @@ IF LOCAL
 		PRINTFORMW 「근데 나 이제, 어떻게 해야 될지, 모르겠어……」
 		PRINTFORMW 「제발, 도와줘어, %CALLNAME:MASTER%……」
 		PRINTW
-		PRINTL 띠링――
+		PRINTDL 띠링――
 		PRINTFORMW 「으흑, %CALLNAME:MASTER%……」
 		PRINTFORMW 「……꿈?」
 		PRINTFORML 「꿈이라 하기엔 너무…… 하아, 됐다.」
 		PRINTFORML 「그럼 %CALLNAME:MASTER%도 여기에서 자고 있고……」
-		PRINTFORMW 「후훗, 이게 얼마나 반가운 얼굴인지 몰라.」
+		PRINTFORMW 「참 다행이야…… 이게 얼마나 반가운 얼굴인지 몰라.」
 		PRINTFORML 「……%마스터는% 결국 인간으로 남겠다고 했었지」
 		PRINTFORMW 「그럼 조만간 날 두고 먼저 가겠다는 거잖아, 이 바보야.」
 		PRINTFORMW 「그래서 꿈에서 나랑 그런 약속을……」
 		PRINTFORMW 「……%CALLNAME:MASTER% 이 천하의 바보변태페도이상성욕자 같으니.」
-		PRINTFORMW 「%마스터가% 없어도 천년만년은 사랑이 갈만큼 응석부리고 말테다!」
+		PRINTFORMW 「%마스터가% 없어도 천년만년은 사랑이 갈만큼 응석부리고 말 테다!」
 		PRINTFORMW 「그 약속을 직접 듣기 전까진 절대 못 죽어, 알았어?」
 		PRINTFORMW 「……여보%UNICODE(0x2665)%」
 		PRINTW
-		PRINTL 저기, 저 이미 깨어있ㄴ……
+		PRINTDL 저기, 저 이미 깨어 있는데요……
 		PRINTFORMW 「죽어 이 바보야――!!!」
 	;실패시?
 	ELSE
@@ -3280,52 +3278,7 @@ IF LOCAL
 				ENDSELECT
 			ENDIF
 		ELSE
-			;서브 스토리 1
-			IF GETBIT(CFLAG:1713, 1)
-				CALL COLORMESSAGE("서브 스토리 발생!", C_YELLOW, 1,0)  
-				PRINTW
-				PRINTFORML 「야, 거기에 책들 쌓아둔게 있었는데 그걸 넘어뜨리면 어떡해?」
-				PRINTFORMDW 책을 읽고있던 플랑이 돌연 큰소리를 치고 있다. 
-				PRINTFORMDL 아무래도 바닥에 널부러져있던 책들을 정리하는 당신을 보고 오해하는 듯 하다.
-				CALL ASK_YN("항의한다", "그냥 치운다")
-				IF !RESULT
-					PRINTFORMDW 당신은 억울해하며 원래 저렇게 있었다고 반론해보았다.
-					PRINTL
-					CALL COLORMESSAGE("「……너가 아니면 내가 그랬다는 거야?」", C_RED, 1,0)
-					PRINTFORMDW 그러나 플랑이 살기를 띠며 당신의 말을 묵살시켜버렸다……
-				ELSE
-					PRINTFORMW 「제대로 원래 있던 순서대로 돌려놔, 알았어?」
-					PRINTFORMDW 당신에게 괜한 화풀이를 하는 플랑을 뒤로하고, 묵묵히 방을 정리하기 시작했다.
-				ENDIF
-				PRINTL
-				PRINTFORMDW 내심 투덜거리며 청소를 하던 당신은, 표지가 비어있는 몇몇 책들을 발견한다.
-				PRINTFORMDW ……무슨 책인지 조금만 봐도 괜찮지 않을까?
-				PRINTFORMW 「맞다, 거기에 있는 책들…… ㅈ, 잠깐 그건 안댓!?!?!」
-				PRINTL
-				PRINTFORMDW \"고결한 뱀파이어를 주워 내 신부로 맞이했습니다\"
-				CLEARLINE 1
-				PRINTFORMDW \"고결한 뱀파이어를 주워 내 신부로 맞이했습니다\" ????
-				PRINTFORMDL \"Cool한 그녀가 Cute해지기 전까지\", \"EX급 보스가 일부러 져준 건에 대하여\"……
-				PRINTFORMDW 이건 또 뭐야,
-				CLEARLINE 1
-				PRINTFORMD 이건 또 뭐야, \"내 여동생이 흡혈귀여울리ㄱ…
-				PRINTFORMW 「죽어――!!!!!!」
-				CALL COLORMESSAGE("투콰아아앙", C_RED, 1,0) 
-				WAIT
-				DRAWLINE
-				PRINTW
-				PRINTFORMW 「아, 눈 떴다. 봤지? 죽이지는 않았다고?」
-				SETCOLOR 0xD3D3D3
-				PRINTFORMW 『아가씨도 참…… 애초부터 아가씨께서 제대로 정리를 하셨더라면 이런 일은 없었을 거라고요?』
-				RESETCOLOR
-				PRINTFORML 「얘가 멋대로 훔쳐보는 걸 어떻게――
-				PRINTFORMDW 아무래도 정신을 잃은 사이에 사쿠야가 사태를 수습해준 모양이다.
-				PRINTFORMDW 의외로 이런 취향이 있는 줄은 몰랐는데, 나중에 따로 물어볼까?
-				CALL COLORMESSAGE("「너, 오늘 일이 퍼진다면 죽어도 죽은게 아닌 인생을 평생 살도록 해줄 거야…… 알겠어?」", C_RED, 1,0)  
-				PRINTFORMDW ……한동안 조용히 있어야겠다.
-				SETBIT CFLAG:1711, 1
-			ELSE
-			ENDIF
+			
 		ENDIF
 	ENDIF
 ENDIF
