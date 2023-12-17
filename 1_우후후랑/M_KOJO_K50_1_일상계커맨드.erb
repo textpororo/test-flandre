@@ -29,7 +29,6 @@ RETURN RESULT
 LOCAL = 1
 ;-------------------------------------------------
 IF LOCAL
-;여기에 구상을 기입해주세요
 	IF TALENT:연인
 		;금일 첫 회화 구상
 		IF !TCVAR:350
@@ -45,7 +44,7 @@ IF LOCAL
 					PRINTFORML 「오늘은, 그…… 화이트 데이인데 말이지이」
 					IF TALENT:처녀
 						PRINTFORML 「그러니깐…… 아, 쿠키? 같이 먹자고?」
-						PRINTFORMW 「……그래, 고마워
+						PRINTFORMW 「……그래, 고마워」
 					ELSE
 						PRINTFORML 「나랑…… ㅇ, 야한 거라도, 할래?」
 						PRINTFORMW 「아니, 내 말은, 오늘은 새하얀 날이기도 하고, 당신이랑…… 저기, 그러니까아」
@@ -92,15 +91,34 @@ IF LOCAL
 						PRINTFORMW 「……달이 참 예쁘다, 그렇지?」
 						CALL ASK_YN("고백에 답해준다", "\"달이 왜?\"")
 						IF !RESULT
+							PRINTFORML 「응! 나도 좋아해%UNICODE(0x2665)%」
 							PRINTFORMDL 당신도 좋아한다고 답하자, 플랑은 기쁜 얼굴을 하곤 입을 포개어 왔다.
-							PRINTFORML 「……응! 나도 좋아해%UNICODE(0x2665)%」
-							PRINTFORMW 「
+							CALL ADD_KISS(50)
+							PRINTFORMW 「우으응, 츄우…… 응, 우음%UNICODE(0x2665)%」
+							PRINTFORMW 「후아아…… 좀 더, %CALLNAME:MASTER%한테 안길래♪」
 						ELSE
+							SELECTCASE RAND:3
+							CASE 0
+								PRINTFORML 「응, 역시 %CALLNAME:MASTER%답네. 딱히 기대도 안 했지만.」
+								PRINTFORMDL 플랑은 체념하듯 스르르 %CALLNAME:MASTER%의 몸에 기댔다.
+								PRINTFORMW 「그래도… 가끔은 알아차리란 말이야 이 바보야.」
+							CASE 1
+								PRINTFORMDL 예상치 못한 반응에 플랑의 표정이 확 굳어 버리고 말았다.
+								PRINTFORML 「지, 진짜 이러기야? 이 날만을 얼마나 기다렸는데에…!」
+								PRINTFORMDW 서러움에 벅찬 얼굴로 %마스터를% 바라보더니,
+								PRINTFORML 「……금기「레바테인」!!」
+								PRINTL
+								PRINTFOTMDW 이후, 플랑 옆에는 너덜너덜해진 꼴로 실신해 있던 %마스터가% 있었다고……
+							CASE 2
+								PRINTFORML 「아, 아냐! 그냥 오늘따라 더 예뻐 보여서 그랬어」
+								PRINTFORML 「……그냥 이거 먹으면서 같이 달구경할래?」
+								PRINTFORMDW 당고를 쥐어주는 플랑은 조금 실망한 듯 보였지만, 금새 미소지으며 %마스터를% 반겨주었다.
+							ENDSELECT
 						ENDIF
 					ELSEIF TIME:5 == 2 || TIME:5 == 3
 						PRINTFORML 「흐리긴 해도, 왜인지 밝은 밤이네.」
 						PRINTFORML 「……조금, 들뜨는 기분이야.」
-						PRINTFORMW 「우선 당고라도 먹고 있을까」
+						PRINTFORMW 「우선 당고라도 먹고 있을까?」
 					ELSEIF TIME:5 == 4 || TIME:5 == 5
 						PRINTFORML 「비오네……」
 						PRINTFORMW 「오늘 대신으로 사쿠야라도 보면서 당고 먹을래?」
@@ -116,13 +134,16 @@ IF LOCAL
 					PRINTFORML 「오늘은 할로윈이니 Trick or Treat 이 빠질 순 없겠지?」
 					IF TALENT:마조
 						PRINTFORMW 「대신 이번엔 나 말고 %마스터가% 나한테 해주는 걸로 하자!」
-						PRINTFORML 「응? 왜냐니, 이걸 당한 사람이 사탕을 못 주면 못된 장난을 치는 거잖아?」
-						PRINTFORMW 「그러니 지금 난 사탕이 없으니까, %마스터가% 못된 장난을 친다면…%UNICODE(0x2665)%」
+						PRINTFORML 「응? 왜냐니? 사탕을 줘야 할 사람이 사탕을 못 주면, 못된 장난을 치는 거잖아?」
+						PRINTFORMW 「그리고 난 지금, 
+						CLEARLINE 1
+						PRINTFORMW 「그리고 난 지금, 사탕이 없으니까……%UNICODE(0x2665)%」
 					ELSE
 						PRINTFORMDL 잠시 음흉하게 웃음을 자아내던 얼굴은 순식간에 발랄한 미소로 바뀌며, 당신을 놀래키는 시늉을 한다.
 						PRINTFORMW 「Trick or Treat!」
-						PRINTFORML 「어라아~? %CALLNAME:MASTER%도 나에게 줄 사탕이 없나보네에~?」
-						PRINTFORML 「후훗%UNICODE(0x2665)% 사탕이 없는 %CALLNAME:MASTER%에겐 못된 장난을...」
+						PRINTFORML 「어라아~? %마스터는% 나에게 줄 사탕이 없나본데~?」
+						PRINTFORMW 「흐흣%UNICODE(0x2665)% 사탕이 없는 %CALLNAME:MASTER%에겐 못된 장난을...」
+						PRINTFORMDL 스윽…… 짠!
 						PRINTFORMW 「...에, 사탕바구니?」
 						CALL COLORMESSAGE(@"콰앙――", C_RED, 1, 1)
 						PRINTW
@@ -133,7 +154,7 @@ IF LOCAL
 					ENDIF
 				ELSE
 					PRINTFORML 「잘 잤어 %CALLNAME:MASTER%?」
-					PRINTFORMW 「꽤 선선한게, 지내기가 편해졌네」
+					PRINTFORMW 「꽤 선선한게, 밖에서도 지내기가 편해졌어」
 				ENDIF
 			CASE 4
 				;정월(오세가츠)
@@ -229,18 +250,18 @@ IF LOCAL
 			;곤드레만드레
 				PRINTDATAW
 					DATALIST
-						DATAFORM 「우먀아아~~암, 음냐링……」
+						DATAFORM 「우먀아아~~암, 음냐아……」
 						DATAFORM 「므에? 와아아♪ %CALLNAME:MASTER%다아――! 올치올치해조오, 빨리이」
 						DATAFORM 「아헤헤헤……♪좀 더어~ 웅?」
 					ENDLIST
 					DATALIST
 						DATAFORM 「쥬인님 쥬인님! 어어…… 멍? 냥?」
 						DATAFORM 「어느 쪼기 더 조아아?」
-						DATAFORM ……확실히 동물 꼬리가 달린 플랑도 귀여우려나.
+						;DATAFORM ……확실히 동물 꼬리가 달린 플랑도 귀여우려나.
 					ENDLIST
 					DATALIST
-						DATAFORM 「껴안아조, 꾸욱하구. 옳지옳지하고 쓰담쓰담해줘어」
-						DATAFORM 「……놓지말아줘어. 계에속……」
+						DATAFORM 「껴안아조, 꾸욱하구. 옳지옳지하고 쓰담쓰담해줘어~」
+						DATAFORM 「……놓지말아줘, 계에속……」
 					ENDLIST
 					DATALIST
 						DATAFORM 플랑은 당신의 손을 잡고 부비적거리고있다.
@@ -291,20 +312,20 @@ IF LOCAL
 				CASE 1
 					PRINTFORML 「봄이라 하면 벚꽃이지.」
 					PRINTFORML 「그렇지만, 어째서 그런 벚꽃을 예쁘다고 보는 걸까?」
-					PRINTFORMW 「덧없이 잎이 떨어지는 모습은, 그 어떤 꽃들도 변함이 없는데......」
+					PRINTFORMW 「덧없이 잎이 떨어지는 모습은, 그 어떤 꽃들도 변함이 없을 텐데...」
 				CASE 2
 					PRINTFORML 「피었다 싶으면, 이미 떨어져가는 벚꽃을」
-					PRINTFORML 「또 내년이 있으니까, 라면서 안타깝게 지켜볼 뿐......」
-					PRINTFORMW 「.....내년에도, 함께 보러 가자. 무조건…… 꼭 무조건이야?」
+					PRINTFORML 「또 내년이 있으니까, 라면서 안타깝게 지켜볼 뿐... 이랄까」
+					PRINTFORMW 「.....내년에도, 함께 보러 가자. 무조건 꼭 가는 거야?」
 				CASE 3
 					PRINTFORML 「이제 좀 따뜻해졌다고 생각했는데, 벌써 더워지기 시작했어」
 					PRINTFORMW 「당신과 있어서 그런 걸까, 하루가 빨리 지나니 어쩔 수 없나보네.」
 				CASE 4
 					PRINTFORML 「%CALLNAME:MASTER% 잠깐만, 가만히 있어봐」
-					PRINTFORMW 「이렇게 올리면…… 짜안♪ 플랑표 화관입니다~」
-					PRINTFORML 「이건…… 어딘가에서 화관을 만들어 주면 좋아한다는 걸 보고, 나도 한번 해봤는데 말이지」
-					PRINTFORML 「워낙 서투른 탓에 잘 하지는 못 했어. 이게 참 곤란하게 됐는데.....」
-					PRINTFORML 「그치만, 나 나름대로 노력했으니까, 저기……」
+					PRINTFORMW 「이렇게 올리면… 짜안♪ 플랑표 화관입니다~」
+					PRINTFORML 「이건… 어딘가에서 화관을 만들어 주면 좋아한다는 걸 보고, 나도 한번 해봤는데 말이지」
+					PRINTFORML 「워낙 서투른 탓에 잘 하지는 못 했어. 이게 참 곤란하게 됐는데...」
+					PRINTFORML 「그치만, 나 나름대로 노력했으니까, 자아」
 					PRINTFORMW 당신은 이 화관이 예쁘다고 칭찬해주며 플랑의 머리를 쓰다듬어주었다.
 					PRINTFORML 「에헤헤…♪%마스터가% 좋아해주니 다행이야」
 				CASE 5
@@ -378,27 +399,27 @@ IF LOCAL
 					ELSE
 						PRINTFORMDL 옷을 벗으니, 작은 몸과 반대되는 풍만한 가슴이 공공연히 드러난다.
 						PRINTFORMW 「……」
-						PRINTFORML (여길 빤히 쳐다보고 있어... 그것도 가슴만!?)
+						PRINTFORML (여길 빤히 쳐다보고 있어... 그것도 가슴만!)
 						;PRINTFORML (막상 꿈에서나 볼법한 사이즈가 되니까 은근 어색한데……)
-						PRINTFORMW (전보다 커져서 그런지, %마스터가% 보면 더 신경 쓰여서...!)
+						PRINTFORMW (전보다 커져서 그런가, 막상 %마스터가% 보면 더 신경 쓰여서...!)
 						PRINTFORMDW 자기가 직접 벗어놓고 뒤늦게 가리기 시작하던 플랑이었다.
 					ENDIF
 				CASE 6
-					PRINTFORML 「멋대로 피를 빨아먹는 모기는 싫지만……」
-					PRINTFORML 「하고있는 짓은 흡혈귀도 다를 바 없으려나」
+					PRINTFORML 「멋대로 피를 빨아먹는 모기는 싫지만…」
+					PRINTFORML 「하고있는 짓은 흡혈귀도 다를 바 없으려나.」
 					PRINTFORMW 「...그래도 모기와 동급으로 불리는 건 좀 싫어」
 				CASE 7
 					PRINTFORML 「그러고 보면, 환상향에선 불꽃놀이는 못 보는 걸까?」
-					PRINTFORML 「알록달록한게 엄청 이쁘다하던데」
+					PRINTFORML 「알록달록한게 엄청 이쁘다고 하던데」
 					PRINTFORMW 「%마스터가% 옆에 있어준다면, 분명 이쁘겠지?」
 				CASE 8
-					PRINTFORML 「축제, 가 보고 싶다」
+					PRINTFORML 「축제, 가 보고 싶다.」
 					PRINTFORML 「유카타도 입고, %마스터와% 서로 만난 다음에, 노점들도 들러보고♪」
 					PRINTFORML 「불꽃놀이도 보면서, %CALLNAME:MASTER%하고 키스도 하면――」
 					PRINTFORMW 「……크흠. 조금, 동화같은 얘기이긴 하지?」
 					PRINTFORMW 「그래도 정말로, 그런 일이 있음 좋겠다고 생각해.」
 				CASE 9
-					PRINTFORML 「쓰르라미 우는 소리가, 해질녘즈음에 들려오게 됐네」
+					PRINTFORML 「쓰르라미 우는 소리가, 해질녘 즈음에 들려오게 됐네.」
 					PRINTFORMW 「뭐랄까, 되게 감성적이게 되는 소리라고 생각하지 않아?」
 				ENDSELECT
 			;가을의 회화
@@ -422,7 +443,7 @@ IF LOCAL
 					ELSEIF TALENT:TARGET:가슴사이즈 < 1
 						PRINTFORMDL 그 말에 따라 가슴을 쳐다본 당신은, 말 없이 유감을 표하였다.
 						PRINTFORMW 「너... 자꾸 내 가슴에 불만이라도 있는 거야!?」
-						;PRINTFORMW 「……이것 봐라? 두고 봐, 앞으로 %CALLNAME:MASTER% 것보다 커져서 짓눌러버릴 거니까!」
+						;PRINTFORMW 「……이것 봐라? 두고 봐, 앞으로 %CALLNAME:MASTER% 것보다 커져서 짓눌러버릴 거라고!」
 					ENDIF
 				CASE 3
 					PRINTFORML 「가을의 식욕이라 하면, 역시 군고구마이려나」
@@ -521,31 +542,53 @@ IF LOCAL
 				CASE 6
 					PRINTFORML 「며느리가 미우면 손자까지 밉다, 라고 해도」
 					PRINTFORML 「거꾸로 좋아하는 사람은, 어떻게 하더라도 좋아하게 돼 버려.」
-					PRINTFORMW 「어느새 깨닫고 나니, 아무렇지도 않았던 %CALLNAME:MASTER%의 얼굴이 멋있다고 느껴졌단 말이야……」
+					PRINTFORMW 「어느새 깨닫고 나니, 아무렇지도 않았던 %CALLNAME:MASTER%의 얼굴이 멋있다고 느껴졌단 말이야…」
 				CASE 7
-					PRINTFORML 「만약 신이 있다면, %마스터가% 태어난 것과, 또 만난 것에 감사해야 하려나」
+					PRINTFORML 「만약 신이 있다면, %마스터가% 태어난 것과, 또 만난 것에 감사해야 하려나?」
 					PRINTFORMW 「%CALLNAME:MASTER%하고 사귄 건, 나도 노력한 그 결과니깐.」
 				CASE 8
 					PRINTFORML 「She got married and then there were none...」
-					PRINTFORMDW 언젠가 플랑이 당신을 기다릴 때에 홀로 부르던 노래인 걸까.
-					PRINTFORMW 「......그런 결말, 기대해도 되는 걸까 %CALLNAME:MASTER%?」
+					PRINTFORMDW 언젠가 플랑이 당신을 기다릴 때에 홀로 부르던 노래인 듯하다.
+					PRINTFORMW 「그런 결말… 기대해도 되는 걸까 %CALLNAME:MASTER%?」
 				CASE 9
 					PRINTFORML 「일일천추라고, 예전에 내가 이해 못 하던 말이 있었어.」
-					PRINTFORML 「홀로 495년을 보내왔는데, 천년같은 하루라고 해서 뭐가 다를까 싶었지」
-					PRINTFORMW 「……매일매일 보고싶은 이가 생기기 전까지는 말야.」
+					PRINTFORMW 「홀로 495년을 보내왔는데, 천년같은 하루라고 해서 뭐가 다를까 싶었지.」
 					PRINTL 
 					PRINTFORMDL 와락, 하고 플랑이 당신에게 안겨왔다.
-					PRINTFORMW 「%마스터가% 언제 찾아올지 기다리던 시간은 몇백몇천의 정도가 아니였어」
-					PRINTFORML 「혼자 있지 않아도 된다는 희망과 동시에 또 혼자 남겨질 거라는 불안감이 뒤엉켜져서」
-					PRINTFORMW 「결국엔 감당 못 한 채로 머릿속이 혼란스러워질 때면, 유독 시간이 흐르지 않는 것 같아서 무서워……」
-					PRINTFORMDW 당신은 플랑에게 살포시 입술을 얹어주었다.
-					PRINTFORMW 「……내 곁에 쭉 있어줘, %CALLNAME:MASTER%.」
+					PRINTFORMW 「……매일매일 보고 싶은 이가 생기기 전까지는 말야.」
+					PRINTFORML 「내 심정이 어땠는지, 얘기해도 될까?」
+					CALL ASK_YN("들어준다", "사양한다")
+					IF !RESULT
+						PRINTFORMW 「%마스터가% 언제 찾아올지 기다리던 시간은 몇백몇천의 정도가 아니였어」
+						PRINTFORML 「혼자 있지 않아도 된다는 희망과 동시에 또 혼자 남겨질 거라는 불안감이 뒤엉켜져서」
+						PRINTFORMW 「결국엔 감당 못 한 채로 머릿속이 혼란스러워질 때면, 유독 시간이 흐르지 않는 것 같아서 무서워…」
+						PRINTFORMDW 당신은 플랑에게 살포시 입술을 얹어주었다.
+						PRINTFORMW 「……내 곁에 쭉 있어줘, %CALLNAME:MASTER%.」
+					ELSE
+						PRINTFORML 「흐응~? %마스터는% 별로 듣고 싶지는 않나본데?」
+						PRINTFORMW 「――후흣, 농담이야. 다음에 얘기해도 상관 없어.」
+						PRINTFORMW 「그냥 잠깐만, 이대로 있을래…♪」
+					ENDIF
+				;원작자가 ntr은 금지라 했다만 취좆은 하면 안 되니 적당히만 언급, ntr은 당연히 없다
+				;왠지 홍마관 ntr이 생각나는 분위기이긴 하다
 				CASE 10
 					PRINTFORML 「있지, %CALLNAME:MASTER%.」
-					PRINTFORML 「외롭다는 기분도 사랑을 아는 이들만이 느낄 수 있을 거고.」
-					PRINTFORMW 「
-					PRINTFORMW 「그렇담 고독한 시절의 나도, 누군가에게 사랑받은 적이 있었던 걸까?」
-					PRINTFORMW 「
+					PRINTFORML 「몇몇 인간들은 자기 애인을 남한테 빼앗기는 것에 흥미가 있다고도 하는데…」
+					PRINTFORMW 「혹시 %마스터는%, 누가 날 빼앗을까 봐 걱정 하고 있었어?」
+					CALL ASK_YN("그렇다", "아니다")
+					IF !RESULT
+						PRINTFORMW 「헤에~ 진심으로 걱정해 주니까 왠지 기쁘기도 한 걸♪」
+						PRINTFORMW 「그래도 마음이 안 놓이면…」
+						PRINTFORMDL 플랑은 %CALLNAME:MASTER%의 손을 잡아 속옷 안으로 집어 넣어 문지르기 시작했다.
+						PRINTFORMW 「내 몸 구석구석마다…앗, %CALLNAME:MASTER%의 냄새와 자국을 잔뜩 남기자구%UNICODE(0x2665)%」
+					ELSE
+						PRINTL 「"플랑쨩은 누구보다 강해서 그럴 일이 없다"… 라니,」
+						PRINTW 「걱정하는 척이라도 해주지, 그게 뭐야 정말! 흥이다!」
+						PRINTW 「……하기야 그런 음흉한 녀석들은 진작부터 죽어 있었겠네.」
+						PRINTDW 어느새 칭찬으로 알아들었는지 히죽히죽거리는 모습이 눈에 보였다.
+					ENDIF
+					;PRINTFORML 「외롭다는 기분도 사랑을 아는 이들만이 느낄 수 있을 거고.」
+					;PRINTFORMW 「그렇담 고독한 시절의 나도, 누군가에게 사랑받은 적이 있었던 걸까?」
 			ENDSELECT
 		ENDIF
 ;마지막 CASEELSE 절대사로 분기가 되어있다니 이거
@@ -560,16 +603,16 @@ IF LOCAL
 				PRINTFORMW 「우음, 반듯이 누워서 잘 수 없는게 불편하려나」
 			CASE 2
 				PRINTFORML 「밤 이외엔 일어나지 못 하는 것도 불편하네」
-				PRINTFORML 「당신이 규칙적인 생활을 했으면, 날 찾아내지 못 했을지도 모르니깐」
-				PRINTFORMW 「그 점에선 %마스터가% 안 좋은 사람이라 다행이야.」
+				PRINTFORML 「만약 당신이 규칙적인 생활을 했으면, 날 못 찾았을지도 모르니깐」
+				PRINTFORMW 「%마스터가% 제때 잠을 안 자는 불량한 아이로 자라서 참 다행이야, 그치?」
 			CASE 3
 				PRINTFORML 「꾸욱 하면, 간단하게 파괴되어버려」
 				PRINTFORML 「그게 생명이든, 물건이든,」
 				PRINTFORMW 「……소중한 사람이든 간에.」
 			CASE 4
 				PRINTFORML 「피는 맛있지. 그야 흡혈귀니깐」
-				PRINTFORML 「단...본능적으로, 말이지?」
-				PRINTFORMW 「조금 야한 기분이 들게 되니까...」
+				PRINTFORML 「다만... 본능적으로, 말이지?」
+				PRINTFORMW 「조금 야한 기분이 들게 되니까…」
 			CASE 5
 				PRINTFORML 「흡혈귀가 되고 싶어? 흐음... 뭐 되고 싶다면, 못 해줄 건 없지만.」
 				PRINTFORML 「단점은 많은데도, 장점이라곤 나하고 있는 시간이 늘어나는 것 뿐」
@@ -580,16 +623,16 @@ IF LOCAL
 				PRINTFORML 「다른 이들은 당연하다는 듯 날 광인으로 보곤 해.」
 				PRINTFORMW 「혹시... %마스터는%, 날 어떻게 생각해?」
 			CASE 7
-				PRINTFORML 「그리고 아무도 없게 됐다.」
-				PRINTFORML 「...이 방에서는, 말이야」
+				PRINTL 「"그리고 아무도 없게 됐다."」
+				PRINTFORML 「...이 방에서는, 말이지.」
 				PRINTFORMW 「그런 해석도 있을지도 모르겠네.」
 			CASE 8
 				PRINTFORML 「495년은, 확실히 길긴 했지만」
 				PRINTFORML 「그 이상으로 누군가를 길게 생각한 적은 없었어.」
-				PRINTFORML 「...그게 너라는 얘기는 아직 안 했거든?」
+				PRINTFORML 「……그게 너라는 얘기는 아직 안 했거든?」
 		ENDSELECT
 	ELSEIF TALENT:사모
-		SELECTCASE RAND:22
+		SELECTCASE RAND:23
 			CASE 0
 				PRINTFORML 「저런 곳에 가둬졌던 이유?」
 				PRINTFORML 「다루지를 못 하잖아, 나 말이야.」
@@ -600,7 +643,7 @@ IF LOCAL
 				PRINTFORMW 「...딱히 네 대답을 듣고 싶다는 건 아니지만.」
 			CASE 2
 				PRINTFORML 「사람을 죽이는 짓 따위 하지 않았어.」
-				PRINTFORML 「최근까진, 음료의 형태로만 알고 있었고...」
+				PRINTFORML 「최근까진, 마실 것의 형태로만 알고 있었고...」
 				PRINTFORMW 「...파괴되기 쉽다는 건 알고 있었지만 말이야.」
 			CASE 3
 				PRINTFORML 「흡혈귀니까 피는 맛있는게 당연하지」
@@ -628,9 +671,10 @@ IF LOCAL
 				;PRINTFORML 「험티덤티라고 알고 있어?」
 				;PRINTFORMW 「답은 달걀이라곤 하는데, 진실은 과연 어떨까……?」
 			CASE 9
-				PRINTFORML 「"그리고 아무도 없었다"...였나」
+				PRINTFORML 「"그리고 아무도 없었다"...였나?」
 				PRINTFORML 「그 이야기에 비교한다면,」
 				PRINTFORMW  「나하고 그 녀석은 서로 막상막하겠네.」
+				;안 읽어봐서 무슨 내용인지 모르겠다
 			CASE 10
 				PRINTFORML 「이런 날개여도 일단 날 수는 있어」
 				PRINTFORMW 「뭐, 실내에서 나는 건 무리겠지만.」
@@ -645,8 +689,8 @@ IF LOCAL
 				PRINTFORML 「그러고 보니 메이링? 하고 얘기할 기회가 생겨서」
 				PRINTFORMW 「어느 정도 대화는 했다만, 날 무서워하고 있었더라.」
 			CASE 14
-				PRINTFORML 「"인생은 무언가를 이루기에는 너무나도 짧지만, 아무 것도 하지 않기엔 너무나도 길다".」
-				PRINTFORML 「흡혈귀의 수명이 겨우 수백에 그치는 건 아니지만……」
+				PRINTFORML 「"인생은 무언가를 이루기에는 너무나도 짧지만, 아무 것도 하지 않기엔 너무나도 길다"…라고,」
+				PRINTFORML 「흡혈귀의 수명이 겨우 수백에 그치는 건 아니지만…」
 				PRINTFORMW 「495년이라는 시간을, 또 다시 혼자서 보내기는 힘들 것 같아.」
 				PRINTFORMW 「……너랑은 상관 없거든? 100년도 못 넘기는 주제에.」
 			CASE 15
@@ -673,6 +717,10 @@ IF LOCAL
 				PRINTFORML 「요즘도 몰래 밖으로 자주 나오냐고?」
 				PRINTFORML 「그게 말이지, 아주 잠깐만 나갔다 왔는데도 다들 난리를 피우는지라……」
 				PRINTFORMDW 그게 하필 플랑이라서 문제였던 것 아닐까.
+			CASE 22
+				PRINTFORML 「내게 있어 소중했던 이라, 글쎄다…」
+				PRINTFORMW 「애초에 누굴 그리워하는 흡혈귀가 세상에 어디 있겠어?」
+				PRINTFORMW 「……그럴 만한 정이 흡혈귀한테도 있으면 모를까.」
 		ENDSELECT
 	ELSE
 		;특정 이벤트 이후 주회차시에 나오는 구상, 히든루트(보류중)
@@ -680,53 +728,51 @@ IF LOCAL
 			;PRINTFORMDL 현재 나오는 구상은 아직 미개발인 상태입니다.
 			;PRINTFORMDL 만일 이 글이 출력된다면 꼭 버그 제보를 해주세요.
 		;그 이외
-		ELSE
-			SELECTCASE RAND:11
-				CASE 0
-					PRINTFORML 「지하에 있는 이유…?」
-					PRINTFORMW 「뭐, 지내기가 편해서 그렇지?」
-					PRINTFORMW 「원하는 건 대체로 여기서 다 얻을 수도 있는데 말이야.」
-				CASE 1
-					PRINTFORML 「」
-					PRINTFORMW 「애초에 누굴 그리워하는 흡혈귀가 세상에 어디 있겠어?」
-					PRINTFORMW 「……그럴 만한 정이 흡혈귀한테도 있으면 모를까.」
-				CASE 2
-					PRINTFORML 「흡혈귀라는 종족도 참 아이러니하다고 생각하지 않아?」
-					PRINTFORMW 「인간을 사냥하는 괴물이, 똑같은 인간의 모습을 하고 있다는 것 말이야……」
-				CASE 3
-					PRINTFORML 「그 녀석? 딱히 싫은 것만은 아냐.」
-					PRINTFORMW 「뭐, 지하에 가두려고 한 이유도 대강 알고는 있으니까……」
-				CASE 4
-					PRINTFORML 「미치광이다, 라고」
-					PRINTFORML 「이따금 밖으로 나오다보면 종종 들려오곤 해.」
-					PRINTFORMW 「……대체 내 어디가 미쳐있다는 걸까.」
-				CASE 5
-					PRINTFORML 「문지기가 있다는 건 알고 있긴 하다만……」
-					PRINTFORMW 「얼핏 봐도 자고 있어서, 제대로 얘기한 적은 없어.」
-				CASE 6
-					PRINTFORML 「파츄리라…… 자주 만나기는 했다만, 얘기를 나눈 적은 별로 없네.」
-					PRINTFORMW 「책을 읽는다고 해도, 도서관에서 간간히 얼굴 비추기만 하고 가니까.」
-					;PRINTFORML 「엥? 코…어, 라니? 그런 거 난 몰라」
-					;원문이 "え、こあ...?和からないや" 인데, こあ가 뭘 말하려는 건지 잘 모르겠음
-				CASE 7
-					PRINTFORML 「사쿠야는, 날 만나도 무서워하지 않는 유일한 메이드려나?」
-					PRINTFORMW 「아니면…… 그냥 원래부터 무서움을 겉으로 드러내지 않는 걸지도 모르지.」
-				CASE 8
-					PRINTFORML 「지하에서 혼자 뭘 하고 있었냐고?」
-					PRINTFORML 「……실은, 누군가가 찾아왔을 때 말고는 기억이 잘 안 나.」
-					PRINTFORMW 「그 무녀나, 마법사나, 아님 너처럼 말이지……」
-				CASE 9
-					PRINTFORMW 「내 능력을 한번 보고싶다고?」
-					PRINTFORMW 「그럼…… 특별히 네가 직접 파괴당하는 기분을 느끼게 해줄게.」
-					CALL COLORMESSAGE(@"「어디 가? 딱 한 번만 죽어보자니깐??」", C_RED, 1, 1)
-				CASE 10
-					PRINTFORML 「가끔은 내 얘기도 더 듣고 싶다고?」
-					PRINTFORMW 「……나 말이야?」
-					PRINTFORMDL 플랑은 무언가를 골똘히 생각하더니, 이내 고개를 절레절레 돌렸다.
-					PRINTFORML 「아니, 됐어.」
-					PRINTFORMW 「굳이 안 좋은 얘기를 들어서 좋을 거 하나도 없잖아?」
-			ENDSELECT
-		ENDIF
+		SELECTCASE RAND:11
+			CASE 0
+				PRINTFORML 「지하에 있는 이유…?」
+				PRINTFORMW 「뭐, 지내기가 편해서 그렇지?」
+				PRINTFORMW 「원하는 건 대체로 여기서 다 얻을 수도 있는데 말이야.」
+			CASE 1
+				PRINTFORML 「달리 친하게 지내는 녀석은 없냐고?」
+				PRINTFORML 「뭐, 당장 너 말고는 오는 사람이 있어야 말이지.」
+				PRINTFORMW 「그렇다고 네가 좋다는 의미가 아니거든? 뭐가 그리 좋다고 웃기는.」
+			CASE 2
+				PRINTFORML 「흡혈귀라는 종족도 참 아이러니하다고 생각하지 않아?」
+				PRINTFORMW 「인간을 사냥하는 괴물이, 똑같은 인간의 모습을 하고 있잖아.」
+			CASE 3
+				PRINTFORML 「레밀, 그 녀석? 딱히 싫은 것만은 아냐.」
+				PRINTFORMW 「뭐, 지하에 가두려고 한 이유도 대강 알고는 있으니까…」
+			CASE 4
+				PRINTFORML 「미치광이다, 라고」
+				PRINTFORML 「이따금 밖으로 나오다보면 종종 들려오곤 해.」
+				PRINTFORMW 「……대체 내 어디가 미쳐있다는 걸까.」
+			CASE 5
+				PRINTFORML 「문지기가 있다는 건 알고 있긴 하다만…」
+				PRINTFORMW 「얼핏 봐도 자고 있어서, 제대로 얘기한 적은 없어.」
+			CASE 6
+				PRINTFORML 「파츄리라… 자주 만나기는 했다만, 얘기를 나눈 적은 별로 없네.」
+				PRINTFORMW 「책을 읽는다고 해도, 도서관에서 간간히 얼굴 비추기만 하고 가니까.」
+				;PRINTFORML 「엥? 코…어, 라니? 그런 거 난 몰라」
+				;원문이 "え、こあ...?和からないや" 인데, こあ가 뭘 말하려는 건지 잘 모르겠음
+			CASE 7
+				PRINTFORML 「사쿠야는, 날 만나도 무서워하지 않는 유일한 메이드려나?」
+				PRINTFORMW 「아니면…… 그냥 원래부터 무서움을 겉으로 드러내지 않는 걸지도 모르지.」
+			CASE 8
+				PRINTFORML 「지하에서 혼자 뭘 하고 있었냐고?」
+				PRINTFORML 「……실은, 누군가가 찾아왔을 때 말고는 기억이 잘 안 나.」
+				PRINTFORMW 「그 무녀나, 마법사나, 아님 너처럼 말이지……」
+			CASE 9
+				PRINTFORMW 「내 능력을 한번 보고싶다고?」
+				PRINTFORMW 「그럼…… 특별히 네가 직접 파괴당하는 기분을 느끼게 해줄게.」
+				CALL COLORMESSAGE(@"「어디 가? 딱 한 번만 죽어보자니깐??」", C_RED, 1, 1)
+			CASE 10
+				PRINTFORML 「가끔은 내 얘기도 더 듣고 싶다고?」
+				PRINTFORMW 「……나 말이야?」
+				PRINTFORMDL 플랑은 무언가를 골똘히 생각하더니, 이내 고개를 절레절레 돌렸다.
+				PRINTFORML 「아니, 됐어.」
+				PRINTFORMW 「굳이 안 좋은 얘기를 들어서 좋을 거 하나도 없잖아?」
+		ENDSELECT
 	ENDIF
 	;금일 회화한 횟수 +1
 	TCVAR:351 += 1
@@ -764,8 +810,8 @@ IF LOCAL
 		[SKIPEND]
 		IF TFLAG:193 == 1
 			PRINTFORMW 기대심에 가득찬 눈이 차를 한 모금 마시자마자 부드럽게 녹아 내린다.
-			PRINTFORML 「후아아......」
-			PRINTFORMW 「앞으로 %마스터가% 타주는 차만 마실 거야아♪……」
+			PRINTFORML 「후아아...」
+			PRINTFORMW 「앞으로 %마스터가% 타주는 차 아니면 못 살아…♪」
 		ELSEIF TFLAG:193 == 0
 			SELECTCASE RAND:3
 			CASE 0
@@ -787,10 +833,10 @@ IF LOCAL
 				PRINTFORML 「새로운 영역에 도전하는 것 자체로도 큰 의미가 있지, 그럼.」
 				PRINTFORMW 「그렇지만 적어도 난, 당신이 평소에 해주던 맛을 좋아한다는 걸 알아줬음 좋겠어.」
 			CASE 1
-				PRINTFORMDL 차가 남은 걸 보니, 맘에 들지는 않았나보네?
-				PRINTFORMW 「아, 그게, 이번 건 차 하나만 즐기기엔 조금 부족해서……」
-				PRINTFORMDW 그렇게 태연하게 답해봤자, 싫다는 표정으로 말하면 누가 믿나.
-				PRINTFORMW 「……이참에. 최근에 내가 사놓은 과자라도 같이 먹지 않을래?」
+				PRINTFORMDL 차가 남은 걸 보니, 맘에 들지는 않았나보다.
+				PRINTFORMW 「아, 그게, 이번 건 차 하나만 즐기기엔 조금 부족해서…」
+				PRINTFORMDL 그렇게 태연하게 답해봤자, 싫다는 표정으로 말하면 누가 믿나.
+				PRINTFORML 「……참, 최근에 내가 사놓은 과자라도 같이 먹지 않을래?」
 				PRINTFORMDW 됐다 그냥.
 			CASE 2
 				PRINTFORMDL 순간 플랑의 표정이 조금 일그러지곤, 언제 그랬냐는 듯 평온하게 돌아온다.
@@ -799,16 +845,16 @@ IF LOCAL
 			CASE 3
 				PRINTFORML 「맛이 이도저도 아닌데, 혹시…?」
 				PRINTFORMDL 헉, 하며 혼자 무언가에 놀란 플랑이 %CALLNAME:MASTER%의 얼굴을 다급히 만져본다.
-				PRINTFORML 「어디 아픈 거야? 요즘에 힘든 일이라도 있어? 아님 내가 뭔가 잘못했다든가……」
-				;PRINTFORML 「혹시 우리 사이가 서운해지고 있는 거라면, 난…!」
-				PRINTFORMW 차에 감정이라도 실리나, 싶던 %마스터는% 플랑의 오해를 풀어줬다……
+				PRINTFORML 「어디 아픈 거야? 요즘에 힘든 일이라도 있어? 아님 내가 뭔가 잘못했다든가…」
+				;PRINTFORML 「혹시 우리 사이가 서운해지고 있는 거라면, 난…!
+				PRINTFORMW 차에 감정이라도 실리나, 싶던 %마스터는% 플랑의 오해를 풀어줬다…
 			ENDSELECT
 		ENDIF
 	ELSEIF TALENT:연모
 		IF TFLAG:193 == 1
 			PRINTFORML 「응, 맛있어.」
 			PRINTFORML 「%CALLNAME:MASTER%하고 있으면 늘 후끈후끈한게, 차를 마셔서 그런 걸까?」
-			PRINTFORML 「혹은 그런게 아니라면……」
+			PRINTFORML 「혹은 그런게 아니라면…」
 			PRINTFORMW 플랑은 이쪽을 상냥한 눈으로 응시하고 있다.
 		ELSEIF TFLAG:193 == 0
 			PRINTDATAW
@@ -820,10 +866,9 @@ IF LOCAL
 					DATAFORM 「그러고 보니 %마스터는% 이런 차라든지 여러 가지 일에 익숙해 보이네」
 					;SIF TALENT:MASTER:아이
 					;	PRINTFORML 「생각보다 어려 보이는데도 말이야. 과거부터 이런 일을 해왔던 걸까?」
-					;이렇게 DATALIST 안에 SIF문을 넣으면, SIF문 안에서 출력하는 대사도 DATAFORM을 써야 하는지 잘 모름
 					DATAFORM 「그게 아님, 원래 그런 능력을 지녔든지?」
 					DATAFORM 「――아하핫, 추궁하려 했던 건 아냐. 너무 그렇게 긴장하지 않아도 돼」
-					DATAFORM (하도 긴장한게 한 번 더 물어보면 쓰러질 셈이야...)
+					DATAFORM (하도 긴장한 게 한 번 더 물어보면 쓰러질 지경이야...)
 				ENDLIST 
 			ENDDATA
 		ELSEIF TFLAG:193 == -1
@@ -833,56 +878,68 @@ IF LOCAL
 			PRINTFORML 신경 쓰지 않아도 된다고 답하곤, 상처는 없는지 찾아본다.
 			PRINTFORMW 「괜찮아. 걱정해줘서 고마워」
 		ENDIF
-	;ELSEIF TALENT:사모
-	;	IF TFLAG:193 == 1
-	;		PRINTFORML 「이 차, 꽤 맘에 들어. %마스터가% 타준 거지?」
-	;		PRINTFORML 「어느샌가 차를 잘 타게 됐네. 」
-	;		PRINTFORML 「」
-	;	ELSEIF TFLAG:193 == 0
-	;		PRINTDATAW
-	;			DATALIST
-	;			ENDLIST
-	;		ENDDATA
-	;	ELSE
-	;		PRINTDATAW
-	;			DATALIST
-	;			ENDLIST
-	;		ENDDATA
-	;	ENDIF
+	ELSEIF TALENT:사모
+		IF TFLAG:193 == -1
+			SELECTCASE RAND:2
+				CASE 0
+					PRINTFORML 「됐어, 오늘은 사양할게.」
+					PRINTFORMW 「방금 네가 차 타는 방식이 엉망인 걸 보니, 영 못 마실 것 같아서.」
+				CASE 1
+					PRINTFORML 「……읏, 또야?」
+					PRINTFORMW 「네 차는 다 좋은데, 제대로 안 됐을 때와의 괴리감이 도저히 적응이 안 돼…」
+				CASE 2
+					PRINTFORML 「후우… %CALLNAME:MASTER%, 나한테 불만이라도 있어?」
+					PRINTFORMW 「지금 네 차에서 온갖 욕이란 욕이 다 느껴져. 할 말 있으면 얘기를 해.」
+					PRINTFORMDW ……차 한 잔으로 관심법이라도 쓰는 건가?
+			ENDSELECT
+		ELSE
+			SELECTCASE RAND:2
+				CASE 0
+					PRINTFORML 「이 차, 꽤 맘에 들어. %마스터가% 한 거야?」
+					PRINTFORMW 「어느샌가 차를 잘 타게 됐네. 뭐라도 탄 건 아니지?」
+					PRINTFORMDW 말은 그렇게 해도 플랑은 %CALLNAME:MASTER%의 차를 즐기고 있었다.
+					;PRINTFORML 「가끔은 너한테도 차를 부탁해도 되겠는 걸.」
+				CASE 1
+					PRINTFORML 「오늘도 네가 타주는 거야? 어디…」
+					PRINTFORMW 「으음…? 확실히 전보다 나아진 것 같기도 하고?」
+					PRINTFORMW 「……그렇게 봐도 더 칭찬 안 해줄 거거든.」
+				;CASE 2
+			ENDSELECT
+		ENDIF
 	ELSE
 		IF TFLAG:193 == 1
 			PRINTFORML 「잘 받을게.」
-			PRINTFORMDW 그렇게 말하곤 찻잔을 받으며, 곧바로 잔을 다 비웠다.
-			PRINTFORMW 「이번 건 괜찮네. 다음에 또 부탁해도 되겠어」
+			PRINTFORMDW 그렇게 말하곤 한 모금 홀짝이더니, 의외라는 눈빛을 보였다.
+			PRINTFORMW 「이번 건 괜찮네. 다음에 또 부탁해도 되겠어.」
 		ELSEIF TFLAG:193 == 0
 			SELECTCASE RAND:3
 				CASE 0
-					PRINTFORML 「……고마워」
+					PRINTFORML 「……고마워.」
 					PRINTFORMDW 입맛에 안 맞는 건 아닌지, 홀짝홀짝 마시고 있다.
 				CASE 1
 					PRINTFORML 「평범해서 조금 아쉬운데.」
 					PRINTFORMW 「사쿠야한테 알려달라고 해보는 건 어때?」
 				CASE 2
-					PRINTFORML 「음…… 뭐어 일단은 말이지」
-					PRINTFORML 「최악은 아닌데, 이대로는 계속 받긴 힘들 것 같네.」
+					PRINTFORML 「음… 뭐어 일단은 말이지」
+					PRINTFORML 「최악은 아닌데, 이대로는 못 마시겠어.」
 					PRINTFORMW 「차에 질리는 건 사양이라서 말이야.」
 			ENDSELECT
 		ELSEIF TFLAG:193 == -1
 			SELECTCASE RAND:2
 				CASE 0
-					PRINTFORML 「……맛없어」
-					PRINTFORMDW 그리 말하곤 플랑은 눈앞에서 먹다 남은 찻잔을 파괴시켜 버렸다......
+					PRINTFORML 「……맛없어.」
+					PRINTFORMDW 그리 말하곤 플랑은 눈앞에서 먹다 남은 찻잔을 파괴해 버렸다...
 				CASE 1
-					PRINTFORML 「……아」
+					PRINTFORML 「아.」
 					PRINTFORMDL 그저 플랑에게 찻잔을 건네기만 했는데도 쨍, 하는 소리가 나며 깨졌다.
 					PRINTFORMDL 상처가 나지 않았나 확인하려 하니,
-					PRINTFORML 「상처는 없어. 잘만 있으니까, 신경 쓰지 마」
+					PRINTFORML 「잘만 있으니까, 신경 쓰지 마.」
 					PRINTFORMDW ……라고 단언한 플랑이었다.
 			ENDSELECT
 		ENDIF
 	ENDIF
 	;금일 일상 커맨드 실행 횟수 + 1
-	;CFLAG:1603 += 1
+	;TCVAR:352 += 1
 ENDIF
 RETURN 1
 ;==================================================
@@ -909,8 +966,8 @@ IF LOCAL
 		IF TALENT:연인
 			IF TFLAG:193 == -1
 				PRINTFORML 「응햐앗!? 까, 깜짝 놀랐어……」
-				PRINTFORMW 「모르고 꾸욱해버리면 어쩌려고! 정말이지」
-				;PRINTFORMW 「%마스터가% 잘못될까 봐 걱정된단 말이야……」
+				PRINTFORMW 「모르고 꾸욱해 버리면 어쩌려고 진짜!」
+				PRINTFORMW 「나 때문에 %마스터가% 잘못될까 봐 걱정된단 말이야…」
 			ELSE
 				SELECTCASE RAND:5
 					CASE 0
@@ -929,7 +986,7 @@ IF LOCAL
 						PRINTFORML 『하아아…… 서로 끌어안으면 온몸이 딱 달라붙는 이 촉감……%UNICODE(0x2665)%』
 						PRINTFORML 『언제까지 안고만 있을 거야! 서로 번갈아가면서 하기로 했잖아!』
 						PRINTFORMW 『……%CALLNAME:MASTER%, 나느은…?』
-						PRINTFORMDW ……혹시나 본체가 아닌 분신을 예뻐해줘도 질투하려나.
+						PRINTFORMDW 혹시나 본체가 아닌 분신을 예뻐해줘도 질투하려나. 
 				ENDSELECT
 			ENDIF
 		ELSE
@@ -942,45 +999,44 @@ IF LOCAL
 						PRINTFORML 「내 머리 만지작거리고 싶어?」
 						PRINTFORMW 「괜찮긴 하다만…… 머리는 여자아이의 생명이니까, 조심히 해야 해?」
 					CASE 1
-						PRINTFORML 「흐엣?! ㅈ, 잠깐만, 이렇게나 가까우면 조금……」
+						PRINTFORML 「ㅈ, 잠깐만, 이렇게나 가까우면 좀…」
 						PRINTFORMW 「아, 알았어, 만져도 되니까! 이 이상 부끄럽게 달라붙지 마앗―!」
 					CASE 2
 						PRINTFORMDL 플랑의 손을 가져다 올려 보니, 곱게 뻗어있는 손톱이 보였다.
 						PRINTFORML 「내가 흡혈귀라 하지만, 손톱이 흉기마냥 길어지지 않도록 제대로 관리하고 있다고?」
-						PRINTFORMW 「혹여나 당신한테 상처입히는 일이 없도록 말이지……」
+						PRINTFORMW 「혹여나 당신한테 상처입히는 일이 없도록 말이지…」
 					CASE 3
 						PRINTFORMW 「인간들이랑 비교했을 때 내 어금니는 어떨까?」
 						PRINTFORMW 「여태 비교한 적이 없었는데, 이 참에 한번 봐보자.」
 						PRINTFORMDL 이윽고 플랑은 입을 크게 벌려, 자신의 송곳니를 보여왔다.
 						PRINTFORMW 「어래허여? 어으혀 기르히?(어때 보여? 엄청 길지?)」
-						PRINTFORMDW 약간 길고 날카로운 듯 보인다……
+						PRINTFORMDW 약간 길고 날카로운 듯 보인다…
 				ENDSELECT
 			ENDIF
 		ENDIF
 	ELSEIF TALENT:사모
 		IF TFLAG:193 == -1
 			PRINTFORMDL 플랑에게 접촉을 시도했지만 얼굴에 흡혈귀 펀치를 맞고 날아가 버렸다.
-			PRINTFORML 「벌써 잊은 모양인데, 난 언제든지 %CALLNAME:MASTER% 널 죽일 수 있다고?」
-			PRINTFORMW 「자기 입장이 어떤지나 먼저 알아줬으면 하는데.」
+			PRINTFORML 「그렇게 음흉한 표정으로 다가와서야, 어느 여자가 허락하겠어?」
 		ELSE
 			SELECTCASE RAND:4
 				CASE 0
 					PRINTFORML 「손정도라면 뭐, 좋을대로 잡아도 상관없다만.」
-					PRINTFORMW 「……야, 멋대로 내 윗팔까지 손 댈 생각이야? 이 변태야.」
+					PRINTFORMW 「……야, 변태같이 멋대로 윗쪽까지 손대려는 거야?」
 				CASE 1
 					PRINTFORMW 「엥, 발? 만지고 싶다고??」
-					PRINTFORML 「으음, 그래도 여태까지 날 상대해준 것도 있으니까…… 특별히 이번만이야.」
+					PRINTFORML 「으음, 그래도 여태까지 날 상대해준 것도 있으니까… 특별히 이번만이야.」
 					PRINTFORMW 「혹여나 간지럽힌다거나 하면 바로 꾸욱해서 죽여버릴 거야.」
 					PRINTFORMW 「……간혹 보면 %마스터는% 참 별난 건지 그냥 변태인 건지 모르겠어.」
 				CASE 2
 					PRINTFORML 「음? 내 옆에 앉아도 되냐고?」
 					PRINTFORMW 「……그래 뭐.」
-					PRINTFORMDW 천천히 플랑의 옆자리에 나란히 앉는다. 조금 살기가 느껴지지만 수줍어하는 모습이 참……
-					CALL COLORMESSAGE("「네 멋대로 손대기만 해봐.」", C_RED, 1,0)  
+					PRINTFORMDW 천천히 플랑의 옆자리에 나란히 앉는다. 조금은 수줍어하는 모습이 참……
+					CALL COLORMESSAGE("「함부로 손대기만 해봐.」", C_RED, 1,0)  
 					PRINTFORMDW 아무래도 지금은 살기 99\%인 것 같다.
 				CASE 3
 					PRINTFORMW 「내 날개가 그렇게나 신경 쓰였어? 그럼 만져보든지.」
-					PRINTFORML 「……날개가 알록달록한게 예쁘다니, 이해 안 될 소리만 하기는……」
+					PRINTFORML 「……날개가 알록달록한게 예쁘다니, 이해 안 될 소리만 하기는…」
 					PRINTFORMDW 조금 빨개진 얼굴이 비쳐보이던 플랑은 고개를 휙 돌려버렸다.
 			ENDSELECT
 	ELSE
@@ -1000,29 +1056,35 @@ IF LOCAL
 					PRINTFORMDL 플랑은 귀찮다는 눈빛을 보이며 한 손을 내밀고 있다.
 					CALL ASK_YN("악수한다", "냄새를 맡는다")
 					IF !RESULT
-						
+						PRINTFORMDL 당신은 두 손 안에 들어오는 자그마한 손을 살포시 감쌌다.
+						PRINTFORMDW 차가운 촉감과는 반대로, 그 안에서 꾸물거리는 여자아이의 손이 마냥 귀엽게 느껴졌다.
+						PRINTFORML 「언제까지 잡고만 있을 건데? 이제 그만 놓으라고.」
+						PRINTFORMW 「……그리고 넌 표정관리를 좀 하는 게 좋겠어, 변태같아.」
 					ELSE
 						PRINTFORMDW 당신은 조심스레 그 손을 감싸쥐어 얼굴 쪽으로 가져오곤,
 						CALL COLORMESSAGE("쓰으으으으으으으으으읍", C_PINK, 1,1)
 						PRINTFORMW 「…?! 잠ㄲ, 너?!」
-						RESETCOLOR
-						PRINTDATADW
-							DATAFORM 아아. 이 손으로 자위를 했다 생각하니, 어쩐지 여자아이의 냄새가……
-							DATAFORM 오, 오오!! 지하에서 곱게 자라온 아가씨의 정수가 흡수된다……!
-						ENDDATA
-						SETCOLOR 0xB22222
-						PRINTL
-						PRINTFORMDW 
+						SELECTCASE RAND:3
+							CASE 0
+								PRINTFORMDW 아아. 이 손으로 자위를 했다 생각하니, 어쩐지 여자아이의 냄새가…
+							CASE 1
+								PRINTFORMDW 오, 오오…!! 지하에서 곱게 자라온 아가씨의 정수가 흡수된다!!
+							CASE 2
+								PRINTFORMDW 우아아앗!!! 불순한 때 하나 묻지 않은 순백의 앨리스를 킁카킁카 맛보고 있다아――!
+						ENDSELECT
+						CALL COLORMESSAGE("투콰아아아앙", C_RED, 1,0)  
+						PRINTW 
+						PRINTDW 그 날 밤, 세간에서 홍마관의 지붕을 뚫고 날아오른 인간이 포착됐다고 한다…
 					ENDIF
 				CASE 1
-					PRINTFORML 「하아…… 넌 쌩판 남한테 몸부터 들이대는 바보구나.」
+					PRINTFORML 「하아… 넌 쌩판 남한테 몸부터 들이대는 바보구나.」
 					PRINTFORMW 「딱히 친해지지도 않은 여자아이한테 끈적하게 달라붙어서 뭘 하려는 거야?」
 				CASE 2
 					PRINTFORML 「갑자기 내 머리는 왜?」
 					PRINTFORMW 「됐으니까, 머리카락 그만 헝클고 손 때.」
-				CASE 3
-					PRINTFORML 「……
-					PRINTFORMW 「
+				;CASE 3
+					;PRINTFORML 「……
+					;PRINTFORMW 「
 			ENDSELECT
 	ENDIF
 ENDIF
@@ -1053,9 +1115,8 @@ IF LOCAL
 		IF TALENT:연인
 		ELSEIF TALENT:연모
 		ELSEIF TALENT:사모
-			
 		ELSE
-			PRINTFORML 「……지금 이런 걸로 네 행동이 용서받을 거라 생각한 거야?」
+			PRINTFORML 「……지금 이런 걸로 네 행동이 용서받을 것 같아?」
 			PRINTFORMW 「필요 없으니까, 저리 치워.」
 		ENDIF
 	;그냥 실패
@@ -1064,9 +1125,9 @@ IF LOCAL
 		ELSEIF TALENT:연모
 		ELSEIF TALENT:사모
 		ELSE
-			PRINTFORML 「"다시는 안 그러겠다" ?」
+			PRINTL 「"다시는 안 그러겠다" ?」
 			PRINTFORML 「내가 뭘 보고 네 말을 믿어? 이래선 목숨 구걸밖에 더 안 되잖아.」
-			PRINTFORMW 「애초에 지금 널 용서해야할 이유 따위 1도 없다고.」
+			PRINTFORMW 「지금 널 용서해야할 이유 따위는 1도 없다고.」
 		ENDIF
 	;성공
 	CASE 0 TO 1
@@ -1074,9 +1135,9 @@ IF LOCAL
 		ELSEIF TALENT:연모
 		ELSEIF TALENT:사모
 		ELSE
-			PRINTFORMW 「……적어도 반성은 할 줄 아는구나.」
+			PRINTFORMW 「적어도 반성은 할 줄 아는구나.」
 			PRINTFORML 「알아들었으면 됐어. 이번 일은 그냥 없던 걸로 해줄게.」
-			PRINTFORMW 「억지로 널 용서하는 것보다도, 차라리 이러는 게 서로에게 편하겠지?」
+			PRINTFORMW 「억지로 널 용서하는 것보다도, 차라리 이러는 게 서로에게 편하잖아?」
 		ENDIF
 	;과자상자 성공
 	CASE 2
@@ -1126,11 +1187,12 @@ IF LOCAL
 			PRINTFORML 「뭐하고 있냐니, 그냥 놀고있는 건데.」
 			PRINTFORMW 「평소에도 난 여기에서 시간을 보내곤 한다고?」
 			PRINTFORMW 「정 궁금하면 한번 둘러보든가 해.」
+			PRINTL 
 			PRINTFORMDL 확실히 창고답게 구석구석에 별의별 물건들이 쌓여있었다.
 			PRINTFORMDW 인형이나 술, 과자에, 보드게임 등등 멀쩡한 것들도 금방 찾아냈다.
 			PRINTFORML 「아, 그것들도 가지고 노는 거라길래 일단은 냅뒀는데 말이야」
-			PRINTFORMW 「아무래도 나 혼자선 제대로 못 쓰는게 많다보니까, 뭐……」
-			PRINTFORMW 「……그걸로 %마스터가% 놀아준다고? 뭐, 이참에 한번쯤 써보는 것도 괜찮으려나.」
+			PRINTFORMW 「아무래도 나 혼자선 제대로 못 쓰는게 많다보니까, 뭐…」
+			PRINTFORMW 「……그걸로 같이 놀자고? 뭐, 이참에 한번쯤 써보는 것도 괜찮으려나.」
 			PRINTL
 			PRINTFORML 「그럼 이제 뭐 할 거야, %CALLNAME:MASTER%?」
 		ELSEIF TALENT:연인
@@ -1142,28 +1204,20 @@ IF LOCAL
 			PRINTFORMDL 당신이 고개를 돌려 눈을 맞춰주니……
 			PRINTFORMW 「응? 아, 아냐! 암것도 아니니까…… 아, 하핫」
 			PRINTFORML 「오늘은 저기, %마스터가% 있으니까! 저번에 못 해봤던 거 한번 해볼까?」
-			PRINTFORMDW 목소리가 떨리고 있지만 그냥 넘어가주기로 했다.
-			[SKIPSTART]
-			노는 거라고 해도 어디까지나 플랑의 일을 돕는 건데
-			서론이 너무 길어지면 루즈해질 것 같아서 일단 남겨두기만 했다
-			그리고 뭔가 이런 투의 플랑은 어울려주기엔 귀찮아 할 것 같은데…… 어떻게 순화시키면 좋을까?
-			SELECTCASE RAND
-				CASE 0
-					IF CFLAG:1510 = 0
-					PRINTFORML 「오늘도 왔구나 %CALLNAME:MASTER%.」
-					PRINTFORMW 「있지, 나랑 놀아주는 거 귀찮다거나 하지 않아…?」
-					PRINTFORMW 「%마스터가% 많은 사람들과 만나느라 바빠보이던데, 
-			[SKIPEND]
+			PRINTFORMDW 얼굴이 빨개지고 있지만 그냥 넘어가 주기로 했다.
 		ELSEIF TALENT:사모
 			PRINTFORMDL 오늘도 변함없이 혼자 놀고있던 플랑에게 다가갔다.
-			PRINTFORML 「
-			PRINTFORML 「여기에서 또 뭔가를 하고 있길래 와봤다고…?」
-			PRINTFORMW 「
-			PRINTFORML 「……그래도 없는 것보단 나으려나.」
+			PRINTFORML 「음? 왜 또 혼자서 놀고 있냐고?」
+			PRINTFORML 「사쿠야랑 한 적도 있고, 물론 재미가 없었다는 건 아니지만」
+			PRINTFORMW 「……아무 생각 없는 너랑 하는 것도 나쁘지만은 않으니까.」
+			PRINTFORMDW 마지막 말을 흐리던 플랑의 귀가 왠지 뜨거워 보였다.
 		ELSE
 			PRINTFORMW 「저번에 했던 거 또 하려고?」
 			PRINTFORMW 「뭐, 나름 재미는 있었으니까 이번에도 어울려줄게.」
 		ENDIF
+		
+		[SKIPSTART]
+		오래 걸릴 것 같으니 보류
 		$PLAY_WITH_FLANDRE
 		PRINTL 자, 무엇을 하며 놀까?
 		;글쎄 스포츠는 내가 잘 살릴 수 있나 잘 모르겠어서 일단 뺌
@@ -1224,15 +1278,13 @@ IF LOCAL
 							PRINTL 플랑은 자신의 한 손을 쥐락펴락하며 당신을 바라보더니,
 							PRINTW "콰앙." 하며 그 손으로 무언가를 움켜잡는 시늉을 하였다.
 							PRINTFORMW 「헤, 오랜만에 장난 한번 쳐봤어.」
-							PRINTFORMW 「장난…이랄까, 옛날에도 늘상 이랬던 적이 있었는데 말야……」
-							PRINTL 어느샌가 플랑은 텅 비어버린 눈으로 허공을 쳐다보고 있었다.
+							PRINTFORMW 「장난…이랄까, 옛날에도 늘상 이랬던 적이 있었는데…」
+							PRINTDL 어느샌가 플랑은 텅 비어버린 눈으로 허공을 쳐다보고 있었다.
 							PRINTFORMW 「어느 순간 무심코 파괴해버린 바람에, 결국엔 인간들을 위협한 꼴이 되고 말았거든.」
 							PRINTFORMW 「……그 때 모두가 날 보던 그 시선은, 지금까지도 달라진 거 하나 없이 여전하더라.」
 						CASE 2
 							PRINTFORML 「그 녀석이랑 달리 난 카리스마조차 없어서」
 					ENDSELECT
-					;늘상
-					;PRINTFORMW 「그나마 말을 들어주는 이들도 '철 들었구나' 라고만 하고 애마냥 구는게 짜증났지.」
 				ELSE
 					PRINTFORMW 「
 					PRINTFORMW 「
@@ -1248,29 +1300,14 @@ IF LOCAL
 							PRINTFORMDL 이윽고 한숨을 내쉬더니 이쪽을 귀찮다는 눈빛으로 쳐다본다.
 							PRINTFORMW 「지금도…… 왜 그렇게 날 만나는 거에 진심인 건지, 도통 이해가 안 간다니깐.」
 						CASE 1
-							PRINTL 달그락――
-							PRINTFORMW 「으음…… 보니까 이 차는 %CALLNAME:MASTER% 너가 탔나 보네, 그렇지?」
-							IF ABL:MASTER:교양 + ABL:MASTER:화술 > 5
-								PRINTFORML 「어떻게 아냐니, 사쿠야의 맛을 그대로 배워올 인간은 너뿐이잖아?」
-								PRINTFORMW 「이 메이드 특유의 향, 용케 잘 담아냈구나…… 수고했어.」
-								PRINTFORMW 「나중에도 또 타준다면 좋겠네.」
-							ELSEIF ABL:MASTER:교양 + ABL:MASTER:화술 > 3
-								PRINTFORMW 「무난하게 잘 탔네, 수고했어.」
-								PRINTFORML 「그렇지만 나중에 또 차를 받았을 땐 이것보단 더 나아야 할 거야.」
-								PRINTFORMW 「사쿠야 대신 너한테 시키는 거니까, 그 정도는 해야겠지?」
-							ELSE
-								PRINTFORMW 「그래, 다음부턴 사쿠야한테 홍차를 받아오도록 해.」
-								PRINTFORML 「왜냐고? 일단 팔팔 끓는 채로 내줬고, 떫은맛이 나는 데다가, 찻잎도 건져내다 말았고 또……」
-								PRINTFORML 「……아주 기본도 안 되어있으니 결과는 당연히 최악이겠지?」
-								PRINTFORML 플랑이 박수를 두 번 치자 어느새 찻주전자와 찻잔이 모두 바뀌어있었다.
-								PRINTFORMW 「후우…… 차는 됐고, 어디까지 얘기했더라?」
+							PRINTDL 달그락…
+							
 							ENDIF
 						CASE 2
 							
 							PRINTFORMW 「인간이 흡혈귀를 무서워한다는 건 어찌보면 당연한 거야.」
 							PRINTFORML 「존재 자체가 인간을 잡아먹는 족속이잖아?」
-							PRINTFORMW 「인간과 겉모습만 같을 뿐, 내용물은 전혀 다른 흉포한 괴물일 뿐이라고.」
-							PRINTFORMW 「……나같은 괴물하고 친하게 지내서 좋을 건 1도 없어.」
+							PRINTFORMW 「인간과 겉모습만 같을 뿐, 내용물은 전혀 다른 흉포한 괴물일 뿐이지.」
 							PRINTL
 							PRIMTFORMW 「
 						CASE 3
@@ -1343,6 +1380,8 @@ IF LOCAL
 				PRINTFORMW 「지금 있는 걸로 하는 게 어떨까?」
 				GOTO PLAY_WITH_FLANDRE
 		ENDSELECT 
+		[SKIPEND]
+		
 	ENDIF
 ENDIF
 RETURN 1
@@ -1372,20 +1411,31 @@ IF LOCAL
 		CASE 0
 			PRINTFORML 「무릎베개? 그래, 이리 와♪」
 			PRINTFORMW 「%마스터는% 이런 딱딱한 다리가 좋은 거지?」
-			PRINTFORMW 「어, 아냐? 내 다리인 거니까 좋다고…?」
-			PRINTFORMW 「……뭐야, 쑥스럽게시리.」
+			PRINTFORMDW 플랑은 사랑스러운 눈빛으로 %CALLNAME:MASTER%의 머리를 쓰다듬고 있다.
 		CASE 1
+			PRINTFORML 「남들만큼 살이 있거나 따뜻하진 않다만, 그래도 괜찮아?」
+			PRINTFORMW 「어, 아냐? 내 다리인 거니까 좋다고…?」
+			PRINTFORMW 「……뭐야, 쑥스럽게시리♪」
 		CASE 2
+			PRINTFORML 「푸~른 하~늘 은~하수……」
+			PRINTFORML 「하~얀 쪽~배에~」
+			PRINTFORMDW 왠지 %CALLNAME:MASTER%에게 익숙하게 들려오는 노랫가락에 잠이 솔솔 온다……
 		ENDSELECT
 	ELSEIF TALENT:연모
 		SELECTCASE RAND:3
 		CASE 0
 			PRINTFORMW 「ㅁ, 무릎베개?! 갑자기 그런 걸 해달라니……」
 			PRINTFORMW 「애초에 말이야…! 내 다리는 가늘기만 하고 또, 부드러운 것도 아니잖아?」
-			PRINTFORMDL 당신은 그 말에 분노하여 여자아이의 다리의 매력에 대해 상세히 늘어놓기 시작했다……
-			PRINTFORML 「아, 알겠으니까아\/\/\/\/ 그런 부끄러운 얘기는 그만…!!!」
+			PRINTFORMDL 당신은 그 말에 분노하여 여자아이의 다리의 매력에 대해 상세히 늘어놓기 시작했다…
+			PRINTW 「아, 알겠으니까아//// 그런 부끄러운 얘기는 그만…!!!」
 		CASE 1
+			PRINTFORML 「……졸려, %CALLNAME:MASTER%?」
+			PRINTFORMW 「난 괜찮으니, 잠깐 눈좀 붙여도 돼.」
+			PRINTFORMW (이렇게 가만히만 있으면 의외로 볼만한 얼굴인데…♪)
 		CASE 2
+			PRINTFORML 「으음… 왠지 이상한 곳에 더 가까워진 것 같지 않아?」
+			PRINTFORMW 「으햣?! 가, 간지러워 %CALLNAME:MASTER%, 으하핫!」
+			PRINTFORMW 「거기는, 더 안 되니까, 이제 그마안♪」
 		ENDSELECT
 	ELSEIF TALENT:사모
 		SELECTCASE RAND:3
@@ -1398,7 +1448,16 @@ IF LOCAL
 			PRINTFORML 「……뭘 봐, 변태같아.」
 			PRINTFORMDW 당신을 지그시 바라보다가도, 눈을 마주치려 하면 피하는게 은근히 귀엽기도 하다.
 		CASE 1
+			;PRINTFORMDW 사전에 플랑이 엄한 데에 손대지 말라고 경고한 탓일까,
+			;PRINTFORMDW %마스터는% 플랑의 다리에 눕힌 채 꼼짝도 못 하고 있었다.
+			PRINTFORML 「너… 지금 우리 모습이 되게 어색해 보이는 거 알아?」
+			PRINTFORML 「이정도는 괜찮으니까, 긴장 풀고 편하게 있어.」 
+			PRINTD 그럼 쓰담쓰담해…… 
+			PRINTW 「싫어.」
 		CASE 2
+			PRINTFORML 「으으음, 뭔가 낯간지럽달까…?」
+			PRINTFORMW 「내 다리에 계속 보슬보슬한 느낌이 드니까, 이거…」
+			PRINTFORMW 「ㄸ, 딱히 이상한 생각 안 했거든?!」
 		ENDSELECT
 	ENDIF
 ENDIF
@@ -1448,8 +1507,7 @@ IF LOCAL
 				PRINTFORMW 의지할 곳도 없이 단호히 거절당했다.
 			ELSE
 				PRINTFORMDL 슬그머니 배에 손을 올려보려 했지만, 플랑에게 잡혀버리고 말았다.
-				CALL COLORMESSAGE("아무 말도 없이 당신을 싸늘한 눈으로 보고 있다.", C_RED, 1,0)
-				;CFLAG:호감도단계진행도 - 하락으로
+				PRINTFORMDW 아무 말도 없이 당신을 싸늘한 눈으로 보고 있다…
 			ENDIF
 		ENDIF
 	ENDIF
@@ -1608,7 +1666,7 @@ IF LOCAL
 			PRINTFORMW 「…내 머리, 단정하게 해줄래?」
 		ENDSELECT
 	ELSEIF TALENT:사모
-		SELECTCASE RAND:2
+		SELECTCASE RAND:3
 		CASE 0
 			PRINTFORMDL 무심코 머리를 쓰다듬으려 손이 나갔다가, 모자가 있음을 깨닫고 이내 멈춘다.
 			PRINTFORML 「……뭐해, 그렇게 가만히만 있을 거야?」
@@ -1620,23 +1678,24 @@ IF LOCAL
 			PRINTFORML 「으음, 조금은 만져도 괜찮긴 한데 말이야……」
 			PRINTFORML 「오늘 이 머리 스타일이 마음에 드니까」
 			PRINTFORMW 「멋대로 머리 모양 바꾸지는 마, 알았지?」
-		ENDSELECT
-	ELSE
-		SELECTCASE RAND:2
-		CASE 0
-			PRINTFORML 「특별히 세팅하고 있는 건 아니긴 한데……」
-			PRINTFORMW 「그다지 흐트러뜨리지 말았으면 좋겠어.」
-		CASE 1
-			PRINTFORMW 「뭐어…… 일단은 손으로 매만지기만 하는 건 괜찮으니까.」
-			PRINTFORMW 「잠깐, 야! 함부로 머리 늘어뜨리지 마!」
 		CASE 2
-		
-			PRINTFORMW 「내 머리 쓰다듬어도, 이득같은 건 없어.」
-		CASE 3
 			PRINTFORMW 「내가 네 애완동물도 아니고, 뭐하는 거야?」
 			PRINTFORMW 「이런 걸 좋아하는 여자아이는 그리 많지 않다고.」
 			PRINTFORMDL 무뚝뚝한 얼굴 뒤로 두 날개가 들썩이고 있었다……
-			PRINTFORMW 「……뭐, 왜. 마저 해.」
+			PRINTFORMW 「……뭐, 왜. 마저 안 해?」
+		ENDSELECT
+	ELSE
+		SELECTCASE RAND:3
+		CASE 0
+			PRINTFORML 「머리는 특별히 세팅하고 있는 건 아니긴 한데…」
+			PRINTFORMW 「그다지 흐트러뜨리지 말았으면 좋겠어.」
+		CASE 1
+			PRINTFORMW 「뭐어… 일단은 손으로 매만지기만 하는 건 괜찮으니까.」
+			PRINTFORMW 「잠깐, 야! 함부로 머리 늘어뜨리지 마!」
+		CASE 2
+			PRINTFORML 「이런 걸 하면 기분이 좋다니까, 한 번 해보는 거긴 한데」
+			PRINTFORMW 「……마치 날 바보 취급 하는 것 같잖아.」
+			PRINTFORMDW 겉보기와 달리 의외로 플랑은 얌전히 쓰다듬어지고 있었다…
 		ENDSELECT
 	ENDIF
 ENDIF
@@ -1704,15 +1763,15 @@ IF LOCAL
 		IF TFLAG:193 == -1
 			PRINTFORMDW 플랑은 경멸하는 눈빛을 보이며 찻잔을 들고만 있다.
 			PRINTFORML 「너는 이미 알고 있겠지? 내가 피를 마시면 흥분한다는 걸.」
-			PRINTFORMW 「그런데 내 차에 피를 탔다라…… 흑심이 너무 적나라하게 드러나는데.」
+			PRINTFORMW 「그런데도 내 차에 피를 탔다는 건… 그런 속셈이라는 거겠지?」
 			PRINTFORMDW 피를 탄 차를 바닥에 버리고 나서, 손가락에 걸린 찻잔이 쨍, 하고 파괴된다.
-			PRINTFORMW 「애초부터 날 그런 눈으로 본 거라면, 무척 실망이야.」
+			PRINTFORMW 「그렇게 안 봤는데, %CALLNAME:MASTER%. 실망이야.」
 			CFLAG:TARGET:호감도 -= 100
 			CFLAG:TARGET:신뢰도 -= 25
 		ELSE
 			PRINTFORML 「피를 탄 차라니. 무슨 속셈일까, %CALLNAME:MASTER%?」
 			PRINTFORML 「아무렇지도 않게 건네준 걸 보니 이미 다 알고있는 거겠지.」
-			PRINTFORML 「뭐, 음흉하기 짝이 없긴 하지만…… 그간의 얼굴을 봐서 이번만 어울려주는 거야.」
+			PRINTFORML 「뭐, 음흉하기 짝이 없긴 하지만… 그간의 얼굴을 봐서 이번만 어울려주는 거야.」
 		ENDIF
 	ENDIF
 ENDIF
@@ -1739,17 +1798,17 @@ IF LOCAL
 			PRINTFORML 「이거 되게 맛있다 %CALLNAME:MASTER%!」
 			PRINTFORML 「이제부터 피 대신으로 마셔도 나쁘지 않겠는데?」
 		ELSEIF ALCOHOL_TASTE(TFLAG:194) <= 9
-			PRINTFORML 「……맛없어」
+			PRINTFORML 「……맛없어.」
 			PRINTFORML 「입가심으로라도 %CALLNAME:MASTER%의 피 마시게 해주면 안 돼?」
 		ELSE
 			PRINTFORML 「의외로……맛있을지도」
-			PRINTFORML 「조금, 어질어질해버려」
+			PRINTFORML 「조금, 어질어질해 버려」
 		ENDIF
 	ELSE
 		IF ALCOHOL_TASTE(TFLAG:194) >= 15
 			PRINTFORML 「……뭐어, 맛있긴 하네」
 		ELSEIF ALCOHOL_TASTE(TFLAG:194) <= 9
-			PRINTFORML 「어린 여자아이한테, 맛없는 술을 먹이고선 뭘 하고싶은 거야?」
+			PRINTFORML 「어린 여자아이한테, 맛없는 술을 먹이고선 뭘 하고 싶은 거야?」
 		ELSE
 			PRINTFORML 「그다지 맛있지는 않으려나」
 			PRINTFORML 「좀 더 센 거로 가져와.」
@@ -1937,14 +1996,17 @@ LOCAL = 1
 ;-------------------------------------------------
 IF LOCAL
 	IF TALENT:연인
+		;誰がこの分岐見るねん
+		;누가 이 분기 보려나
 		IF TCVAR:껴안고첫회
-			PRINTFORMW 「이제야 해주는 거구나」
-			PRINTFORMW 「줄곧 기다렸는데… 정말이지 심술궂은 사람이네」
-			PRINTFORML 「그래도 내 몸에 흥미가 없는 건 아니라서 다행이야」
+			PRINTFORMW 「이제야 해주는 거구나.」
+			PRINTFORMW 「줄곧 기다렸는데… 정말이지 심술궂은 사람이네.」
+			PRINTFORML 「그래도 내 몸에 흥미가 없는 건 아니라서 다행이야.」
 			PRINTFORMW 「만일 그랬다면, 내 전부를 당신에게 줄 수 없을테니깐.」
-			PRINTFORMW 「……와 줘」
+			PRINTFORMW 「……와 줘%UNICODE(0x2665)%」
 			PRINTFORMW 애처롭게 그리 말하는 플랑을, 당신은 상냥하게 끌어안았다.
-			;誰がこの分岐見るねん
+		;ここまでABLあげるやつおらんやろ・・・おらんよな？
+		;이만큼 ABL 올리는 녀석 없을 거야... 없겠지?
 		ELSEIF ABL:TARGET:1 >= 20 && ABL:TARGET:2 >= 20 && ABL:TARGET:3 >= 20 && ABL:TARGET:4 >= 15 && ABL:TARGET:0 >= 20
 			PRINTFORML 「아, 와주는 거구나……」
 			PRINTFORMW 「기뻐, 그것도 엄청. 응? 왜냐니」
@@ -1953,7 +2015,6 @@ IF LOCAL
 			PRINTFORMW 「자위해도 부족할 정도로, 깊고 또 깊게…… 내 온몸에 쾌락을 새겼잖아.」
 			PRINTFORML 「이젠 당신에게 안기지 않으면 만족할 수 없으니까……」
 			PRINTFORMW 「책임지고, 기분 좋게 해줘 %CALLNAME:MASTER%……%UNICODE(0x2665) *3%」
-			;ここまでABLあげるやつおらんやろ・・・おらんよな？
 		ELSE
 			PRINTFORML 「응, 이제 하는 거구나」
 			PRINTFORMW 「기뻐라…… 왜냐니, 그야」
@@ -1969,10 +2030,10 @@ IF LOCAL
 			PRINTFORMW 「만약 잘못 됐다고 생각이 든다면, 책임지고 사귀어주면 돼.」
 			PRINTFORMW 「그러니 지금은……안아줘?」
 		ELSE
-			PRINTFORML 「또~오 나하고 하고 싶은 거구나」
-			PRINTFORMW 「……딱히 아직도 서로 몸을 겹쳤으니 책임을 지라는 동화같은 말은 하지 않을 거지만.」
-			PRINTFORMW 「내가 당신을 좋아한다는 건 진짜니까, 그거엔 답을 해줬으면 하는데」
-			PRINTFORMW 「이 정사가 끝난 후에도, 응?」
+			PRINTFORML 「나하고 또 하고 싶은 거야?」
+			PRINTFORMW 「아직도 서로 몸을 겹쳤으니 책임을 지라는 동화같은 말은 하지 않을 테지만…」
+			PRINTFORMW 「내가 당신을 좋아한다는 건 진짜니까, 그거엔 답을 해줬으면 하는데.」
+			PRINTFORMW 「이 정사가 끝난 후에도… 응?」
 		ENDIF
 	ENDIF
 ENDIF
@@ -1997,12 +2058,12 @@ IF LOCAL
 			PRINTFORML 「어디로 데려가는 거야?」
 			PRINTFORML 「인간마을? 신사? 그것도 아님 달인가?」
 			PRINTFORMW 「뭐어, 어디라도 따라갈 거지만.」
-			IF TALENT:연인
-				PRINTFORMW 「당신의 옆이 내가 있을 곳이니까 말이야. 후훗♪」
-			ENDIF
+			SIF TALENT:연인
+				PRINTFORMW 「당신의 옆이 내가 있을 곳이니까 말이야. 흐흥♪」
 		ELSEIF TALENT:사모
-			PRINTFORML 「내가 있으면 어딜 가더라도 사람들이 피한다고 생각한다만……」
-			PRINTFORMW 「그럼에도 상관 없다면, 마음대로 해」
+			PRINTFORML 「내가 있으면 어딜 가더라도 사람들이 피한다고 생각한다만…」
+			PRINTFORMW 「그래도 상관 없다면, 네 마음대로 해.」
+		;사모 직전에나 겨우겨우 볼 수 있을 듯
 		ELSE
 			PRINTFORML 「날 데려가서 뭘 하려는 거야?」
 			PRINTFORMW 「언제든지 간단하게 죽일 수 있으니까, 이상한 짓은 생각 안 하는 게 좋을 거야.」
@@ -2023,6 +2084,7 @@ RETURN 1
 
 TFLAG:192 =0
 
+;이건 좀 아닌 것 같아서 폐기
 ;IF CFLAG:1502 >= 10
 ;	TFLAG:192 == -1
 ;ELSE
@@ -2089,34 +2151,32 @@ IF LOCAL
 			PRINTFORMDL 저기, 플랑. 이번에 할 말이……
 			PRINTFORMW 「쉿, 뭔 말인지 다 알아. 아무래도 이제야 마음이 생긴 것 같네」
 			PRINTFORMW 「네, 저도 당신을 좋아하고 있습니다. 우리 사귀도록 해요」
-			DRAWLINE
-			WAIT
-			PRINTFORMW 「라는 그런 형편 좋은 말만 할 줄 알았어? 정말 어이가 없어서.」
+			PRINTL
+			PRINTFORMW 「……라는 그런 형편 좋은 말만 할 줄 알았어? 정말 어이가 없어서.」
 			PRINTFORMW 「%마스터는% 내 고백을 거절했는데도, 여전히 사랑을 속삭이면서 헷갈리게 만들고 있고……」
 			PRINTFORMW 「마지막에도 %마스터는% 분명…… 내 마음을 가차없이 밀어내 버렸잖아.」
 			PRINTFORMW 「그래놓고 지금에 와서야 이미 떠난 사랑을 구하는 거야?」
 			PRINTFORMW 「지금 장난해? 어디서 듣도보도 못 할 얘기를 하고 자빠졌어…!」
 			PRINTFORMW 「날 싫어하는 건지, 아님 좋아하는 건지 둘중 하나만 하란 말이야!!」
-			PRINTW
+			PRINTL
 			PRINTL
 			PRINTW
+			[SKIPSTART]
+			이건 진짜 아닌 것 같다... 현타올듯;
 			;고백에 실패하면 그대로 손절, 관계 회복 루트로 갈까 싶은데
-			IF TFLAG:193 == 0
-				PRINTFORMW 「난 이제 %CALLNAME:MASTER%의 사랑놀음에 지쳤어. 다시는 내 눈앞에 보이지 마.」
-				CFLAG:TARGET:호감도 == 0
-				CFLAG:TARGET:신뢰도 == 0
-				IF TALENT:연모 == 1
-					TALENT:연모 = 0
-				ELSEIF TALENT:사모 == 1
-					TALENT:사모 = 0
-				ENDIF
-				ABL:50:친밀 == 0
-				TALENT:일선을넘지않음 == 1
-				CUP:TARGET:반감 += 4000
-				CUP:TARGET:불쾌 += 4000
-			;고백에 성공할 시
-			ELSE
+			PRINTFORMW 「난 이제 %CALLNAME:MASTER%의 사랑놀음에 지쳤어. 다시는 내 눈앞에 보이지 마.」
+			CFLAG:TARGET:호감도 == 0
+			CFLAG:TARGET:신뢰도 == 0
+			IF TALENT:연모 == 1
+				TALENT:연모 = 0
+			ELSEIF TALENT:사모 == 1
+				TALENT:사모 = 0
 			ENDIF
+			ABL:50:친밀 == 0
+			TALENT:일선을넘지않음 == 1
+			CUP:TARGET:반감 += 4000
+			CUP:TARGET:불쾌 += 4000
+			[SKIPEND]
 		ENDIF
 	ENDIF
 ENDIF
@@ -2285,7 +2345,7 @@ IF LOCAL
 				PRINTW 가슴에 손을 뻗었다.
 			ENDIF
 			PRINTFORML 「으응, 정말 능숙, 하네엣…」
-			PRINTFORMW 「앗, 응, 좀 더엇…… 아앗!」
+			PRINTFORMW 「앗, 응, 좀 더엇…… 아앗%UNICODE(0x2665)%」
 		ELSE
 		ENDIF
 	;여기 CASE 34에서 고간을 더듬는다가 있다
@@ -2317,24 +2377,24 @@ IF LOCAL
 	;펠라치오(MASTER가 여성이라면 쿤니)
 	CASE 51
 		IF TALENT:연인 || TALENT:연모
+			;마스터가 여자
 			IF TALENT:MASTER:성별 == 1
-			;여자
-			ELSE
 			;남자 또는 후타나리
+			ELSE
 				PRINTFORML 「이거, 엄천 단단해져 있네에♪」
 				PRINTFORML 슥슥―, 하고 플랑의 손끝이 자지의 뒷줄을 따라 문질러간다.
 				PRINTFORMW 「……할짝. 우음―, 츄루, 쥬븟, 쥬루루릇……츄우」
 				SELECTCASE TALENT:MASTER:형상
-				CASE 1,2
 				;미성숙 또는 허접자지
+				CASE 1,2
 					PRINTFORML 「조금 핥기만 해도 부르르 떠는게……귀여워%UNICODE(0x2665)%」
 					PRINTFORMW 「또 한 번 더 받아갈게? 츄우%UNICODE(0x2665)%」
-				CASE 6,10
 				;방망이 자지&말자지(신묘마루 요술망치로 경이적인 양물을 만들 경우)
+				CASE 6,10
 					PRINTFORML 「……아무렴 그렇다 쳐도 큼직하네」 
 					PRINTFORMW 「입 안에 전부 들어갈 순 없겠지만, 이런게 보통인 걸까……츄웃%UNICODE(0x2665)%」
-				CASEELSE
 				;발광자지, 보통, 돌기 부착 자지
+				CASEELSE
 					PRINTFORML 「큼직하다아, %CALLNAME:MASTER%」
 					PRINTFORML 「이거, 내 안에 넣으려고 이리 된 거겠지?」
 					PRINTFORMW 「……왠지 이상하게나마 기쁠지도, 츄우%UNICODE(0x2665)%」
@@ -2345,8 +2405,8 @@ IF LOCAL
 	;스마타(카이아와세貝合わせ)					
 	CASE 52
 		IF TALENT:연인 || TALENT:연모
+			;마스터가 여자
 			IF TALENT:MASTER:성별 == 1
-			;女
 			ELSE
 				PRINTFORML 「%CALLNAME:MASTER% 거 잠시 빌릴게?」
 				PRINTFORMW 「응, 우앗……%CALLNAME:MASTER% 거 단단해서어, 자위잇%UNICODE(0x2665)% 기분 좋아……우읏%UNICODE(0x2665)%」
@@ -2409,7 +2469,6 @@ IF LOCAL
 		ELSE
 		ENDIF
 	;손가락 넣기(MASTER가 여자일 떄만?)
-	;백합 구상을 만든다는 건가
 	CASE 57
 	;가슴애무(MASTER가 여자일 때만?)
 	CASE 58
@@ -2459,7 +2518,7 @@ IF LOCAL
 			ELSE
 				PRINTFORML 「부, 부비부비이~……」
 				PRINTFORML 「……미안. 그게, 작은 탓에 끌어안아도 그닥 변함은 없을지도」
-				PRINTFORMW 「오히려 좋다고? 응……고마워」
+				PRINTFORMW 「오히려 좋다고? ……고마워」
 			ENDIF
 		ELSE
 		ENDIF
@@ -2591,7 +2650,7 @@ IF LOCAL
 		ELSE
 		ENDIF
 	;抱きつき,抱きしめ（차이를 몰라서 함께 한다）
-	;이 두 개가 각각 뭐라고 번역되는지 찾아봐야함 (껴안는다? 안는다?)
+	;이 두 개가 각각 뭐라고 번역되는지 모르겠다 (껴안는다? 안는다?)
 	CASE 122,123
 		IF TALENT:연인 || TALENT:연모
 			PRINTFORML 「세게, 꽈악 안아서, 꼬옥하고 품에 안겨줄게」
@@ -2605,7 +2664,7 @@ IF LOCAL
 		IF TALENT:연인 || TALENT:연모
 			PRINTFORML 「%CALLNAME:MASTER%의 손, 나보다도 크고 따뜻해……」
 			PRINTFORML 「……나, %CALLNAME:MASTER%를 위해서라면 뭐든 할 테니까, 응?」
-			PRINTFORMW 「히야앗, 녜 퍄암 어르은 냐져어~ (꺄아앗, 내 뺨 얼른 놔 줘~)」
+			PRINTFORMW 「히야앗, 녜 퍄암 어르은 냐져어~ (내 뺨 얼른 놔 줘~)」
 		ELSE
 		ENDIF
 	;냄새를 맡는다
@@ -2619,7 +2678,7 @@ IF LOCAL
 	CASE 129
 		IF TALENT:연인 || TALENT:연모
 			PRINTFORML 「쪼옥, 할짝…… 응, %CALLNAME:MASTER%의 맛이 나」
-			PRINTFORMW 「조금 짜긴 하지만, 감미로워서, 엄니를 세우게 돼버려%UNICODE(0x2665)%」
+			PRINTFORMW 「조금 짜긴 하지만, 감미로워서, 엄니를 세우게 돼 버려%UNICODE(0x2665)%」
 		ELSE
 		ENDIF
 	ENDSELECT
@@ -2753,7 +2812,7 @@ IF LOCAL
 				IF TALENT:연인
 					PRINTFORML 「으음, 뭐어…… 여러 가지 있는데 뭘 들려줄까?」
 					$ASK_TO_FLANDRE
-					CALL ASK_M("잡다한 이야기", 1, "야한 얘기", EXP:이상경험 >= 1 || MARK:고통각인 >= 1, "호칭에 대해서(미작동)", EXP:애정경험 > 9999, "앞으로 서로 어떡할지" , EXP:데이트경험 >= 100 && !EXP:출산경험, "아무 것도 아니야", 1)
+					CALL ASK_M("잡다한 이야기", CFLAG:1601 < 3, "야한 얘기", EXP:이상경험 >= 1 || MARK:고통각인 >= 1, "호칭에 대해서(미작동)", EXP:애정경험 > 9999, "앞으로 서로 어떡할지" , EXP:데이트경험 >= 100 && !EXP:출산경험, "아무 것도 아니야", 1)
 					SELECTCASE RESULT
 					CASE 0
 						IF CFLAG:1601 == 0
@@ -2782,12 +2841,13 @@ IF LOCAL
 								PRINTFORMW 「오늘 얘기했던 건 그만 잊어버려. 내일은, %마스터가% 좋아하는 나로 있을 테니까」
 								CFLAG:1601 += 1
 							ELSE
-								PRINTFORML 「아무래도 그렇겠지? 별거 아닌 잡생각이니까」
+								PRINTFORML 「아무래도 그렇겠지? 별거 아닌 잡생각이니까.」
 								PRINTFORMW 「또 물어볼 거 있으면 언제든지 들어줄게.」
 							ENDIF
 						ELSEIF CFLAG:1601 == 1
 							;두 번째 선택
-							PRINTFORML 「아무 거나 얘기해보라고 해도 말이지, 그렇게까지 끄집어낸다 해도 잘 안 떠오르는데……」
+							PRINTFORML 「아무 거나 얘기해보라고 해도 말이지…」
+							PRINTFORML 「그렇게까지 끄집어낸다 해도 잘 안 떠오르는데……」
 							PRINTFORMW 「그렇담 이전의 이야기를 마저 다뤄볼까?」
 							PRINTL
 							PRINTFORMW 「어음…… 뭐어 그니깐, 내가 %마스터를% 좋아한다는 건 확실해. 그치그치」
@@ -2802,8 +2862,8 @@ IF LOCAL
 							PRINTL
 							PRINTFORMW 「이때까지 %CALLNAME:MASTER% 이외엔 좋아하게 된 적도 없는데」
 							PRINTFORML 「여러 책을 읽어 찾아보아도, 명확한 조건같은 것도 없고.」
-							PRINTFORMW 「"상대의 싫은 부분까지 좋아하게 되는 것이 「애정」" 이라든가…… 그리 써져있긴 했는데」
-							PRINTFORML 「그렇지만, 난 %CALLNAME:MASTER%의 바람기인 부분까지 좋아해 주지 못 해서……」
+							PRINTW 「"상대의 싫은 부분까지 좋아하게 되는 것이 「애정」" 이라든가…… 그리 써져있긴 했는데」
+							PRINTFORML 「그렇지만, 난 %CALLNAME:MASTER%의 바람기인 부분까지는 좋아해 주지 못 해서……」
 							PRINTFORMW 「결국, 그런 독점욕이 강한 나 자신이 싫어져」
 							PRINTL
 							PRINTFORMW 「%마스터를% 줄곧 좋아할 수 있었던, 어느 불만도 없던 내가 없어지면 사랑이 끝나겠지」
@@ -2815,24 +2875,29 @@ IF LOCAL
 							PRINTFORMW 「――거짓말이야. 적어도, 지금은」
 							PRINTFORMW 「자, 이번 이야기도 잊어 줘」
 							PRINTFORMW 「괜찮아. 사랑이나 애정이나 둘 다 아니라고 해도, 나는 %마스터가% 좋아. 그것만큼은 확실하다구?」
-						CFLAG:1601 += 1
+							CFLAG:1601 += 1
 						ELSEIF CFLAG:1601 == 2
 							;다음은 세 번째
 							PRINTFORMW 「또 그 잡다한 얘기 해달라고? 아니, 뭐어, 일단 나름대로 진전이 있었다만…」
 							PRINTL
 							PRINTFORMW 「언니하고, 이따금 이야기해봤는데」
-							PRINTFORML 『그거 정말 보잘 것 없는 생각이구나』
+							SETCOLOR 0xFFB6C1
+							PRINTFORML 『그거 참 보잘 것 없는 생각이구나.』
+							RESETCOLOR
 							PRINTFORMW 「하곤 웃더라.」
-							PRINTFORML 「이번만큼은 \'역시 이 새끼 죽여 버릴까\' 싶었는데」
+							PRINTL 「이번만큼은 '역시 이 새끼 죽여 버릴까' 싶었는데」
 							PRINTFORMW 「……비교적, 납득할만한 얘기를 하더라.」
 							PRINTL
+							SETCOLOR 0xFFB6C1
 							PRINTFORMW 『지금까지 인간관계가 거의 없던 너는 몰랐을 테지만, 우선 현실은 그 말대로 딱 들어맞았던 경우같은 건 없단다.』
 							PRINTFORMW 『사랑이나, 애정이나, 그런 말들은 감정 표현 중 하나일 뿐… 정답도 오답도 없지.』
+							RESETCOLOR
 							PRINTW
 							PRINTFORML 「그렇기에, 응. 나는, %CALLNAME:MASTER%에게 사랑받지 않는게 무서워서, 정답같은 걸 찾고있었을 뿐이라는 걸 알았어.」
 							PRINTFORML 「다음부턴 내 매력으로 %마스터를% 꼼짝도 못 하게 해줄 거야.」
 							PRINTFORML 「좀 더 나를 좋아하게 될 테니까, 각오하고 있으라고!」
 							PRINTFORML 「절대로 놓치지 않을 거야, %CALLNAME:MASTER%%UNICODE(0x2665)%」
+							CFLAG:1601 += 1
 						ELSE
 							PRINTFORML 「미안. 이제 얘깃거리는 그 이야기를 끝으로 더는 생각이 안 나」
 							PRINTFORML 「나중에 또 뭔가 고민거리가 있으면, 그 때 알려줄게.」
@@ -2890,9 +2955,9 @@ IF LOCAL
 									PRINTFORMDW 유난히 아쉬워하는 기색의 플랑을 뒤로 하였다……
 							ENDSELECT
 						CASE 3
-							PRINTFORML 「…이젠 큼직한 아기 행세야?」
-							PRINTFORML 응애. 나 애기 %CALLNAME:MASTER%, 맘마 줘.
-							PRINTFORMW 「하아…… 아기 것까지 먹지는 마」
+							PRINTFORML 「……이젠 큼직한 아기 행세야?」
+							;PRINTFORMDL 응애. 나 애기 %CALLNAME:MASTER%, 맘마 줘.
+							PRINTFORMW 「하아… 아기 것까지 다 먹지는 마?」
 						ENDSELECT
 					CASE 2
 					;現状選ばれないように条件難化
@@ -3008,7 +3073,7 @@ IF LOCAL
 			;▼연주［세션을 함께하기］or［음악 반주하기］
 			;※[음악지식]소유자만 (TALENT:음악지식으로 변화）
 			;TALENT:음악지식,1=연주하고 있다,2=노래하고 있다,3=춤추고 있다
-			;TFLAG:193,1=리듬을 ㅏ며,0=성공,-1=실패,-2=악기가 없어서 보고만 있다
+			;TFLAG:193,1=리듬을 타며,0=성공,-1=실패,-2=악기가 없어서 보고만 있다
 			;PRINTFORMW 
 		CASE 9
 			;▼채집［채집을 돕기］
@@ -3069,6 +3134,7 @@ IF LOCAL
 		PRINTW 외로워하던 아가씨의 소중한 친구가 되어주었답니다.
 		PRINTW 그리고 둘은 모두의 앞에서 아가씨의 오해를 풀어, 행복하게 살았답니다……
 		PRINTW
+		SETCOLOR 0xFFB6C1
 		PRINTFORMW 『좋은 이야기구나. 사쿠야, 잠시 아이를 부탁할게』
 		PRINTFORMW 『……그리워하고 있구나.』
 		PRINTFORML 『아직은 힘들텐데, 너무 무리하지 않아도 돼 플랑.』
@@ -3085,22 +3151,24 @@ IF LOCAL
 		PRINTFORMW 「%마스터가% 없으면 더는 사랑하는 법을 알 수도 없어!」
 		PRINTFORMW 「%마스터가% 없으니 사랑이 뭔지도 잊혀져 가…!」
 		PRINTFORML 「%마스터가% 있어야 난, 나느은……」
-		PRINTFORMW 『플랑……』
-		PRINTFORMW 「도와줘, 언니……」
+		SETCOLOR 0xFFB6C1
+		PRINTFORMW 『플랑…』
+		RESETCOLOR
+		PRINTFORMW 「도와줘, 언니…」
 		PRINTFORMW 「나아, 이대로는, 약속을 못 지켜어…!」
-		PRINTFORMW 「그리워, 만나고 싶어, 더는 잊고 싶지가 않아아……」
-		PRINTFORMW 「근데 나 이제, 어떻게 해야 될지, 모르겠어……」
+		PRINTFORMW 「그리워, 만나고 싶어, 더는 잊고 싶지가 않아아…」
+		PRINTFORMW 「근데 나 이제, 어떻게 해야 될지, 모르겠어…」
 		PRINTFORMW 「제발, 도와줘어, %CALLNAME:MASTER%……」
 		PRINTW
 		PRINTDL 띠링――
-		PRINTFORMW 「으흑, %CALLNAME:MASTER%……」
+		PRINTFORMW 「으흑, %CALLNAME:MASTER%…」
 		PRINTFORMW 「……꿈?」
 		PRINTFORML 「꿈이라 하기엔 너무…… 하아, 됐다.」
-		PRINTFORML 「그럼 %CALLNAME:MASTER%도 여기에서 자고 있고……」
+		PRINTFORML 「그럼 %CALLNAME:MASTER%도 여기에서 자고 있고…」
 		PRINTFORMW 「참 다행이야…… 이게 얼마나 반가운 얼굴인지 몰라.」
 		PRINTFORML 「……%마스터는% 결국 인간으로 남겠다고 했었지」
 		PRINTFORMW 「그럼 조만간 날 두고 먼저 가겠다는 거잖아, 이 바보야.」
-		PRINTFORMW 「그래서 꿈에서 나랑 그런 약속을……」
+		PRINTFORMW 「그래서 꿈에서 나랑 그런 약속을…」
 		PRINTFORMW 「……%CALLNAME:MASTER% 이 천하의 바보변태페도이상성욕자 같으니.」
 		PRINTFORMW 「%마스터가% 없어도 천년만년은 사랑이 갈만큼 응석부리고 말 테다!」
 		PRINTFORMW 「그 약속을 직접 듣기 전까진 절대 못 죽어, 알았어?」
@@ -3230,7 +3298,7 @@ IF LOCAL
 					PRINTFORMW 「인간들은 청소를 순식간에 해내는 능력이라도 있는 걸까??」
 				ELSEIF TFLAG:194 == 0
 					PRINTFORMW 「의외로 %마스터는% 깔끔 떠는 성격이구나?」
-					PRINTFORML 먼지한테조차 우리의 정사를 엿보이게 하기는 싫…
+					PRINTFORMDL 먼지한테조차 우리의 정사를 엿보이게 하기는 싫…
 					PRINTFORMW 「ㅁ, 뭔 소릴 하는 거야―!」
 				ELSE
 					SELECTCASE RAND:2
@@ -3238,7 +3306,7 @@ IF LOCAL
 						PRINTFORML 「오래 걸릴 것 같아? 응, 기다리고 있을게.」
 						PRINTFORMW 「난 %마스터를% 보는 것만으로도 하루를 날 수 있으니깐」
 					CASE 1
-						PRINTFORML 플랑은 청소하고 있는 당신으로부터 눈을 떼지 않고 있다.
+						PRINTFORMDL 플랑은 청소하고 있는 당신으로부터 눈을 떼지 않고 있다.
 						PRINTFORMW 「우으으…… 눈앞에 %마스터가% 있는데도 기다려야 한다니, 정말!」
 					ENDSELECT
 				ENDIF
@@ -3249,17 +3317,16 @@ IF LOCAL
 				PRINTFORMW 「이게 도움이 될지는 잘 모르겠지만.」
 			ELSEIF TFLAG:193 == 0
 				PRINTFORML 「난 부수기 위해 태어난 존재일 테니까」
-				PRINTFORMW 「도와주더라도, 큰 의미는 없으려나.」
-				PRINTFORML [0] 그렇다
-				PRINTFORML [1] 아니다
-				PRINTFORML [2] 쓰다듬는다
+				PRINTFORMW 「도와주더라도, 큰 의미는 없겠다만…」
+				PRINTFORMDL [0] 그렇다
+				PRINTFORMDL [1] 아니다
+				PRINTFORMDL [2] 쓰다듬는다
 				INPUT
 				SELECTCASE RESULT
 				CASE 0
 					PRINTFORML 「……너 방금 1도 망설이지 않고 답한 것 같다? 응??」
-					PRINTFORML 「하아아, 
-					PRINTFORML 
-					PRINTFORML 「이제와서 말 바꾸는 건 없어, 늦었다고 이 바보야.」
+					PRINTFORML 「이제와서 말 바꿔봤자지, 됐거든!」
+					PRINTFORMDW %CALLNAME:MASTER%의 반응에 삐졌는지 고개를 휙 돌리고 혼자 청소하고 있었다…
 				CASE 1
 					PRINTFORML 「부수지 않고 지켜주는 점에서 의미가 있다고?」
 					PRINTFORMW 「다름아닌 내가 무언가를 지킨다라……」
@@ -3271,7 +3338,7 @@ IF LOCAL
 					PRINTFORMW 「우아앗, 갑자기 뭐하는 거야?」
 					PRINTFORMW 「나름 진지하게 얘기하는데 이렇게 넘겨버리면…!」
 					PRINTFORML 앞에서 뭐라 하든, 당신은 플랑의 모자도 넘겨 머리를 어루만지고 있었다.
-					PRINTFORMDW 「……그 녀석이나 너나, 다 제멋대로 굴고 있어……」
+					PRINTFORMDW 「……그 녀석이나 너나, 다 제멋대로 굴고 있어…」
 				CASEELSE
 					PRINTFORML 당신은 무언가 말하려 했지만, 이내 말문이 막혀버리고 말았다.
 					PRINTFORML 「아냐, 그냥 신경 꺼. 아무 것도 아니니까.」
@@ -3318,10 +3385,10 @@ IF LOCAL
 		ELSEIF TALENT:사모
 			PRINTFORMW 털끝조차 건드리지 못 한다니……」
 			PRINTFORML 당신과 대련해준 플랑에게 감사 인사를 건넸다.
-			PRINTFORMW 「……내가 크게 도와준 건 없는 것 같은데, 무슨 쓸데없는 소리람.」
+			PRINTFORMW 「……내가 크게 도와준 건 없으니까, 상관 없잖아.」
 			PRINTFORML 「것보다, 계속 이 상태로 있을 거야?」
 			PRINTFORMDW 당신에게 안긴 플랑이 째려보며 내려달라고 닥달하고 있다.
-			PRINTFORMDW 왠지 플랑의 얼굴이 살짝 빨개진 것 같았는데……
+			PRINTFORMDW 왠지 플랑의 얼굴이 살짝 빨개진 것 같았는데…
 		ELSE
 			PRINTFORMW 이렇게나 압도적으로 지다니……」
 			PRINTFORMW 수고 많았다며 밥 한번 사주겠다고 하자……
@@ -3347,12 +3414,12 @@ IF LOCAL
 				PRINTFORMW 「금기 「포비든 프루츠」!」
 		ENDSELECT
 	ELSE
-		SELECTCASE RAND:2
 		;훈련 내용, 스펠카드나 탄막같은 거 묘사
+		SELECTCASE RAND:2
 			CASE 0
-				PRINTFORML 플랑 한명으로도 벅찬데 넷이서 탄막을 쏘니 죽을 맛이다.
-				PRINTFORML 이런게 훈련이라니 도대체 어떻게……
-				PRINTFORMW 콰앙――
+				PRINTFORMDL 플랑 한명으로도 벅찬데 넷이서 탄막을 쏘니 죽을 맛이다.
+				PRINTFORMDL 이런게 훈련이라니 도대체 어떻게……
+				PRINTFORMDW 콰앙――
 				PRINTW
 			CASE 1
 				PRINTFORML 
@@ -3406,7 +3473,7 @@ IF LOCAL
 			PRINTFORML 「그러니깐, 이렇다는 건가? 아냐? 그렇구나…」
 			PRINTFORML 플랑 나름대로 해석하고 정리했겠지만, 유감스럽게도 중간중간에 정정할 부분이 있었다.
 			PRINTFORML 「정말, 내 머리가 약한게 다 드러나네」
-			PRINTFORMW 「이렇게라도 당신과 지내는 시간이 늘었으면 좋겠는데……」
+			PRINTFORMW 「이렇게라도 당신과 지내는 시간이 늘어나니 좋긴 하다만…」
 		ELSEIF ABL:MASTER:교양 == ABL:TARGET:교양
 			PRINTFORML 「서로 간에 가르침이 있고, 서로 간에 같은 수준의 교양이 있다면」
 			PRINTFORML 「회화도 조금은 활기가 띨 거라고 생각한단 말이지.」
@@ -3658,6 +3725,7 @@ RETURN 1
 
 ;==================================================
 ;442以降のコマンドは、実行しても口上はおそらく表示されないのでテンプレでもスルー
+;442 이후의 커맨드는, 실행해도 구상은 아마 표시되지 않으므로 템플릿에서도 스루
 ;==================================================
 
 
@@ -3721,6 +3789,7 @@ IF LOCAL
 ENDIF
 RETURN 1
 [SKIPEND]
+
 ;==================================================
 ;603,손을 잡는다
 ;TFLAG:193 (1=대성공 0=성공 -1=실패)(실패라도 뿌리치거나 하지는 않습니다)
@@ -3744,17 +3813,18 @@ IF LOCAL
 	IF TALENT:연인
 		PRINTFORMW 「에스코트 해 주시겠나요, 오라버~님?」
 		PRINTFORMW 「……농담이야. 조금 부끄럽다아, 우으으…… 이만 잊어 줘!」
-		PRINTFORML 당신은 일부러 공손하게 손을 쥐곤, 귀여운 아가씨께 달달한 말을 전했다.
-		PRINTFORMW 「~~~~읏! 정말, %마스터는% 날 너무 잘 알아서 문제라니깐……」
-		PRINTFORMW 그리 말하곤 플랑은 팔까지 휘감아,  웃는 얼굴로 앞으로 가도록 재촉하였다.
+		PRINTFORMDL 당신은 일부러 공손하게 손을 쥐곤, 귀여운 아가씨께 달달한 말을 전했다.
+		PRINTFORMW 「~~~~읏! 정말, %마스터는% 날 너무 잘 알아서 문제라니깐…」
+		PRINTFORMDW 그리 말하곤 플랑은 팔까지 휘감아,  웃는 얼굴로 앞으로 가도록 재촉하였다.
 	ELSEIF TALENT:연모
-		PRINTFORML 「지이이……」
-		PRINTFORMW 이쪽을 뚫어져라 바라보며 비어있는 손을 드러내 보이는 플랑.
-		PRINTFORML 뭘 바란 건가 싶더니 손이었나, 고요한 요구에 따라 손을 잡으니 방긋하고 웃는다.
+		PRINTFORML 「지그시……」
+		PRINTFORMDW 이쪽을 뚫어져라 바라보며 비어있는 손을 드러내 보이는 플랑.
+		PRINTFORMDL 뭘 바란 건가 싶더니 손이었나, 고요한 요구에 따라 손을 잡으니 방긋하고 웃는다.
 		PRINTFORMW 「후흥~♪ 그럼, 가볼까?」
 	ELSEIF TALENT:사모
-		PRINTFORML 「손 잡지 않더라도, 딱히 도망가지는 않아.」
-		PRINTFORMW 「그냥 손을 잡고싶은 거라고? 상관없기는 한데……」
+		PRINTFORMDL 손을 달라는 부탁에, 플랑은 의아해하며 순순히 응해줬다.
+		PRINTFORML 「도망가지 않을 건데, 딱히 손 잡고 가지 않아도 되잖아.」
+		PRINTFORMW 「그냥 손을 잡고 싶은 거라고? ……더 이해가 안 가.」
 	ENDIF
 ENDIF
 RETURN 1

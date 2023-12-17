@@ -48,10 +48,10 @@
 ;CFLAG:1501 (마스터와) 만나지 못 한 일수
 ;CFLAG:1502 고백받은 횟수
 ;CFLAG:1601 무슨 생각을 하는지 - 시답잖은 이야기 를 택한 횟수
-;CFLAG:1602 금일 회화 커맨드를 실행한 횟수
-;CFLAG:1603 금일 일상 커맨드를 실행한 횟수
 
 ;TCVAR:50:350 금일 첫 회화
+;TCVAR:50:351 금일 회화 커맨드를 실행한 횟수
+;TCVAR:50:352 금일 일상계 커맨드를 실행한 횟수
 ;******************************************************************************
 ;### 구상존재판정 ###################################
 @M_KOJO_K50_1(ARG)
@@ -439,7 +439,7 @@ IF LOCAL
 			PRINTFORML 「있잖아, %CALLNAME:MASTER%」
 			PRINTFORMW 「9. 이 숫자가 뭘 의미하는지 알아?」
 			PRINTFORML 「……내가, %CALLNAME:MASTER%에게 고백한 횟수야.」
-			PRINTFORMW 「이젠, 10번째이지만」
+			PRINTFORMW 「이젠, 10번째이지만.」
 			PRINTFORML  %마스터는% 이번이 10번째라는 것에 여러 의미로 놀란 듯 입이 조금 벌어진다.
 			PRINTFORMW 「진짜거든…… 난 포기하지 않는다고.」
 			PRINTL
@@ -452,7 +452,7 @@ IF LOCAL
 			PRINTFORMW 「――%CALLNAME:MASTER%.」
 			PRINTFORMW 「어떡해야 %마스터가% 좋아하는 사람이 될 수 있어?」
 			PRINTFORMW 「어떡해야 %마스터가% 고백을 받아들여주는 거야?」
-			PRINTFORMW 「어떡해야…
+			PRINTFORMW 「어떡해야…」
 			PRINTW
 			PRINTFORMW 「%CALLNAME:MASTER%, 앞으로 나하고, 쭈―욱, 함께 있어줄, 거야……?」
 			PRINTFORMW 「이젠, 혼자있는 건……싫단 말이야. 그니까, %CALLNAME:MASTER%」
@@ -491,7 +491,7 @@ IF LOCAL
 			PRINTFORMW 「세게, 아주 세게... 끌어안아줘」
 			RETURN 1
 		ELSEIF CFLAG:1502 == 11
-			PRINTFORML 「어......?」
+			PRINTFORML 「어...?」
 			PRINTFORMW 「괜찮은 거지...? 버리지 않는 거지, %CALLNAME:MASTER%...?」
 			PRINTFORML 눈물이 흐르더니, %CALLNAME:MASTER%의 얼굴을 보며 뭔가 납득한 듯 초승달 모양의 웃음을 띄웠다.
 			PRINTFORML 「……아니지. 주인님, 이라든가? 아님 오라버님이라든가 좋을까?」
@@ -750,29 +750,26 @@ IF LOCAL
 		ELSEIF TALENT:연모
 		ELSEIF TALENT:사모
 		ELSE
-			IF CFLAG:1700 < 0
-				SELECTCASE RAND:3
-				CASE 0
-					PRINTFORML 「또 너야? 질리지도 않나보네.」
-					PRINTFORMDW 플랑은 방에 들어오는 당신을 불편해하고 있다.
-					PRINTFORMW 「하아, 흡혈귀를 스토킹하는 인간이 세상에 어디 있냐고……」
-				CASE 1
-					PRINTFORML 「멋대로 남의 방에 들어오지 않았으면 좋겠는데.」
-					PRINTFORMDW 왠진 몰라도 벌써부터 미움받는 것 같다.
-				CASE 2
-					PRINTFORMDW 플랑은 계속 당신을 못 본 척 무시하고 있다.
-					CALL ASK_YN("인사한다", "무시한다")
-					IF !RESULT
-						PRINTFORML 「……안녕.」
-						PRINTFORMDW 당신이 인사를 건네자, 플랑도 못마땅한 듯 인사를 받아줬다.
-						PRINTFORMW 「이제 서로 얼굴 봤으니까 나가.」
-						PRINTFORMDW 이러려고 받아준 거였구나……
-					ELSE
-						
-					ENDIF
-				ENDSELECT
-			ELSE
-			ENDIF
+			SELECTCASE RAND:3
+			CASE 0
+				PRINTFORML 「또 너야? 질리지도 않나보네.」
+				PRINTFORMDW 플랑은 방에 들어오는 당신을 불편해하고 있다.
+				PRINTFORMW 「하아, 흡혈귀를 스토킹하는 인간이 세상에 어디 있냐고…」
+			CASE 1
+				PRINTFORML 「멋대로 남의 방에 들어오지 않았으면 좋겠는데.」
+				PRINTFORMDW 왠진 몰라도 벌써부터 미움받는 것 같다.
+			CASE 2
+				PRINTFORMDW 플랑은 계속 당신을 못 본 척 무시하고 있다.
+				CALL ASK_YN("인사한다", "무시한다")
+				IF !RESULT
+					PRINTFORML 「……안녕.」
+					PRINTFORMDW 당신이 인사를 건네자, 플랑도 못마땅한 듯 인사를 받아줬다.
+					PRINTFORMW 「이제 서로 얼굴 봤으니까 나가.」
+					PRINTFORMDW 이러려고 받아준 거였구나……
+				ELSE
+					PRINTFORMDW 플랑도 관심이 없다는 듯 지나쳐 버렸다.
+				ENDIF
+			ENDSELECT
 		ENDIF
 		RETURN 1
 	ENDIF
@@ -1117,9 +1114,8 @@ IF LOCAL
 			PRINTFORML 「그럼 나중에 봐, %CALLNAME:MASTER%.」
 		ELSE
 			PRINTFORMDL 이쪽을 보지도 않고, 다시 걸어가고 있었다.
-			IF TALENT:사모
+			SIF TALENT:사모
 				PRINTFORML 「일일이 다 인사하고... 참 이상하다니까.」
-			ENDIF
 		ENDIF
 		RETURN 1
 	ENDIF
@@ -1351,7 +1347,7 @@ IF LOCAL
 				PRINTFORML 「그게, 조금 야한 기분이 들어서」
 				PRINTFORML 「본능적으로, 참을 수 없게 됐어」
 				PRINTFORML 「미안해. 멈출 수가 없어」
-				PRINTFORMW 「…잘 먹을게%UNICODE(0x2665)%」
+				PRINTFORMW 「……잘 먹겠습니다%UNICODE(0x2665)%」
 			ENDIF
 			RETURN 1
 		ENDIF
@@ -1386,7 +1382,7 @@ IF LOCAL
 			ELSEIF TALENT:연모
 				PRINTFORML 오늘은 이만 됐다며 당신이 사양하자, 플랑은 방금 전까지의 기세에 미안함을 느끼며 사과한다.
 				PRINTFORML 「미안, 저기, 정말로 싫었던 거야?」
-				PRINTFORML 「응, 이제 그만 자제할게. 미안……」
+				PRINTFORML 「응, 이제 그만 자제할게. 미안…」
 			ENDIF
 			RETURN 1
 		ENDIF
@@ -1397,12 +1393,14 @@ IF LOCAL
 		;-------------------------------------------------
 		IF LOCAL:1 && ARG:1 == 1
 			IF TALENT:연인
-				;IF (BASE:50:기력 <= (MAXBASE:기력 / 10) * 2)　みたいな
+				;IF (BASE:50:기력 <= (MAXBASE:기력 / 10) * 2) 이 분기 보고 싶네
+				;기력을 다한 플랑이 마스터한테 몸을 의지해 오는 모습... 상상만 해도 발기가 멈추지 않아
 				;押し倒されてる間にどれだけ絶頂したかによって分岐させてみたいかも
+				;덮쳐진 동안 얼마나 절정에 이르렀느냐에 따라 분기시켜 보고 싶을지도
 				PRINTFORML 「응, 후으으……」
-				PRINTFORML 「%CALLNAME:MASTER%덕분에 
-				PRINTFORML 「그치만…… %마스터는% 아직 부족하려나?」
-				PRINTFORMW 「혹시 더 하고 싶다면…… 」
+				PRINTFORML 「기분, 좋았어, %CALLNAME:MASTER%……」
+				PRINTFORML 「그치만… %마스터는% 아직 부족하려나?」
+				PRINTFORMW 「혹시 더 하고 싶다면…%UNICODE(0x2665)%」
 			ELSEIF TALENT:연모
 				PRINTFORML 다 끝마친 이후에 어느 정도 이성을 되찾은 플랑은, 우물쭈물하며 당신에게 말을 건다.
 				PRINTFORML 「저기, %CALLNAME:MASTER%」
@@ -2063,7 +2061,7 @@ IF LOCAL
 		PRINTFORMW ……다음에 또 언제 만나러 와줄까?
 		PRINTL
 		PRINTDL 플랑은 아직 자신의 마음을 부정하고 있는 것 같다……
-		CALL COLORMESSAGE(@"플랑은【츤데레】기질을 새로이 취득하게 되었다!", C_YELLOW, 2, 1)
+		CALL COLORMESSAGE(@"플랑은【츤데레】기질을 새로이 취득하게 됐다!", C_YELLOW, 2, 1)
 		
 		SIF TALENT:50:츤데레 = 0
 			TALENT:50:츤데레 == 1
@@ -2760,6 +2758,7 @@ IF LOCAL
 		ELSEIF ARG == 30
 			IF TALENT:연인
 				;そして誰もいなくなった
+				;그리고 아무도 없게 됐다
 				PRINTFORML 「AND THEN THERE WERE NONE...」
 				PRINTFORML 「너무, 외로워어…… 나 혼자아, 흑, 두지, 말아줘……」
 				PRINTFORML 「보고싶어, %CALLNAME:MASTER%……」
