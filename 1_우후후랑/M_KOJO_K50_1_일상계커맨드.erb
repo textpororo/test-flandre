@@ -32,6 +32,7 @@ IF LOCAL
 	IF TALENT:연인
 		;금일 첫 회화 구상
 		IF !TCVAR:350
+			TCVAR:350 ++
 			SELECTCASE DAY:2
 			CASE 1 
 			;만우절
@@ -780,7 +781,7 @@ IF LOCAL
 		ENDSELECT
 	ENDIF
 	;금일 회화한 횟수 +1
-	TCVAR:351 += 1
+	TCVAR:351 ++
 ENDIF
 RETURN 1
 ;==================================================
@@ -3385,7 +3386,7 @@ IF LOCAL
 			PRINTFORMW 「이젠 %마스터가% 날 지켜줄 수 있겠네.」
 			PRINTFORMW 「앞으로 이렇게나 든든한 사람한테 안겨 지켜진다고 생각하면…후훗♪」
 		ELSEIF TALENT:연모
-			PRINTFORMW 상처도 못 낼 정도로 압도적이야……」
+			PRINTFORMW 상처도 못 낼 정도로 압도적이야…」
 			PRINTFORMW 
 		ELSEIF TALENT:사모
 			PRINTFORMW 털끝조차 건드리지 못 한다니……」
