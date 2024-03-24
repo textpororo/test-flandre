@@ -29,11 +29,11 @@ IF LOCAL
 	ELSEIF CFLAG:수면
 	ELSE
 		IF TALENT:연인
-			PRINTFORML 「우읏, 아, ……참」
-			PRINTFORMW 「변태.」
+			PRINTL 「우읏, 아, ……참」
+			PRINTW 「변태.」
 		ELSEIF TALENT:연모
-		    PRINTFORML 「응햐앗!?」
-			PRINTFORML 「아… 그, 그쪽은 무척 예민하니까」
+		    PRINTL 「응햐앗!?」
+			PRINTL 「아… 그, 그쪽은 무척 예민하니까」
 		ENDIF
 	ENDIF
 ENDIF
@@ -67,36 +67,36 @@ IF LOCAL
 		IF TALENT:연인
 			PRINTDATAW
 				DATALIST
-					DATAFORM 플랑은 당신의 품에 안기자마자 녹아 내릴 것만 같은 얼굴이 돼버린다.
-					DATAFORM 「따뜻하다아~」
-					DATAFORM 「이 온기를 기억해버린 이상, 이젠 그 옛날의, 외톨이로 못 돌아간단 말이야아~」
+					DATA 플랑은 당신의 품에 안기자마자 녹아 내릴 것만 같은 얼굴이 돼버린다.
+					DATA 「따뜻하다아~」
+					DATA 「이 온기를 기억해버린 이상, 이젠 그 옛날의, 외톨이로 못 돌아간단 말이야아~」
 				ENDLIST
 				DATALIST
-					DATAFORM 「이대로 쭉 있는게 좋아」
-					DATAFORM 「...어쩌면, 제멋대로였던 시절은 이제 지나간 거네」
-					DATAFORM 「그래도, 가능하면 이렇게 있고싶어.」
-					DATAFORM 「안 되는, 거려나」
-					DATAFORM 어리광피우는 플랑도 귀여울 것 같다, 라고 하며 당신은 껴안은 플랑의 머리를 쓰다듬어주었다.
-					DATAFORM 당신의 품에 얼굴을 푹 묻은 플랑의 귀가 빨개졌다.
-					DATAFORM 「...뭐야, 내 옛날 모습이 떠올라서 괜히 부끄러워지잖아
+					DATA 「이대로 쭉 있는게 좋아.」
+					DATA 「...어쩌면, 제멋대로였던 시절은 이제 지나간 거네.」
+					DATA 「그래도, 가능하면 이렇게 있고 싶어.」
+					DATA 「안 되는, 거려나?」
+					DATA 어리광피우는 플랑도 귀여울 것 같다, 라고 하며 당신은 껴안은 플랑의 머리를 쓰다듬어 주었다.
+					DATA 당신의 품에 얼굴을 푹 묻은 플랑의 귀가 빨개졌다.
+					DATA 「...뭐야, 내 옛날 모습이 떠올라서 괜히 부끄러워지잖아.」
 				ENDLIST
 				DATALIST
 					DATAFORM 「%조사처리(CALLNAME:MASTER, "가")% 허리 숙여서 꽉 안아주니까」
 					DATAFORM 「%CALLNAME:MASTER%의 목덜미가 내 눈앞에 보이는데」
-					DATAFORM 「…그게 좀 걱정되네」
+					DATA 「…그게 좀 걱정되네.」
 				ENDLIST
 			ENDDATA
-		;そのうち恋慕かつ恋人と恋慕で分けるかも
-		;연모かつ恋人はすべての選択肢、恋慕は現状の二つのみみたいな感じで
+		;조만간 연모, 연인과 연모로 나눌지도
+		;연모인 동시에 연인은 모든 선택지, 모는 현재의 두 가지 뿐이라는 느낌으로
 		ELSEIF TALENT:연모
 			PRINTDATAW
 				DATALIST
-					DATAFORM 「우음ー, 응」
-					DATAFORM 「나쁘지 않아, 라고 할까. 괜찮을지도」
+					DATA 「우음ー, 응」
+					DATA 「나쁘지 않아, 라고 할까. 괜찮을지도」
 				ENDLIST
 				DATALIST
-					DATAFORM 「이상하게도 이 압박감이 좋아.」
-					DATAFORM 「그러니까 좀 더, 세게, 응?」
+					DATA 「이상하게도 이 압박감이 좋아.」
+					DATA 「그러니까 좀 더, 세게, 응?」
 				ENDLIST
 			ENDDATA
 		ENDIF
@@ -134,42 +134,42 @@ IF LOCAL
 			;키스経験ゼロ条件だと通らない？
 				PRINTDATAW
 					DATALIST
-						DATAFORM 「아, 키스 해주는 거구나」
-						DATAFORM 생각보다 미적지근한 반응을 보였기에 시험 삼아 조금씩 멀어지려 하자,
-						DATAFORM 「아니 아니 아니, 싫다는게 아니야! 오히려, 나도 하고 싶었어…」
-						DATAFORM 「근데 이쪽에서 권해도 좀처럼 해주지 않았으니까」
-						DATAFORM 「틀림없이――인간의 피를 마신 입에 키스하고싶지 않을 거라고 생각했었기에 그랬나봐.」
-						DATAFORM 「기뻐, 정말, 정말로……눈물날 것 같아」
-						DATAFORM 「그럼, 해줘. 천천히, 상냥하게, 정열적으로…」
+						DATA 「아, 키스 해주는 거구나.」
+						DATA 생각보다 미적지근한 반응을 보였기에 시험 삼아 조금씩 멀어지려 하자,
+						DATA 「아니 아니 아니, 싫다는게 아니야! 오히려, 나도 하고 싶었어…」
+						DATA 「근데 이쪽에서 권해도 좀처럼 해주지 않았으니까」
+						DATA 「틀림없이―― 인간의 피를 마신 입에 키스하고 싶지 않을 거라고 생각했었나봐.」
+						DATA 「기뻐, 정말, 정말로……눈물날 것 같아」
+						DATA 「그럼, 해줘. 천천히, 상냥하게, 정열적으로…」
 						;KISS ME TENDERLY GENTLY VIOLENTLY
 					ENDLIST
 				ENDDATA
 			ELSE
 				PRINTDATAW
 					DATALIST
-						DATAFORM 「응……후앗, 츄, 릅……푸하아,」
-						DATAFORM 「정말 정열적이었네. 이 다음도 해버려?」
+						DATA 「응……후앗, 츄, 릅……푸하아,」
+						DATA 「정말 정열적이었네. 이 다음도 해버려?」
 					ENDLIST
 					DATALIST
-						DATAFORM 「엥, 나랑? 자, 잠깐 이거, 부끄러운데--」
-						DATAFORM 「응, 우 ~ 읏 츄웃」
-						DATAFORM 입술과 입술이 조금 닿았다가 떨어진다. 사랑스러운 버드 키스다.
-						DATAFORM 「……그렇게 흐뭇한 표정으로 보지 마. 부끄러워」
+						DATA 「엥, 나랑? 자, 잠깐 이거, 부끄러운데--」
+						DATA 「응, 우 ~ 읏 츄웃」
+						DATA 입술과 입술이 조금 닿았다가 떨어진다. 사랑스러운 버드 키스다.
+						DATA 「……그렇게 흐뭇한 표정으로 보지 마. 부끄러워」
 					ENDLIST
 				ENDDATA
 			ENDIF
 		ELSEIF TALENT:연모
 			PRINTDATAW
 				DATALIST
-					DATAFORM 「우웅, 쥬루릅, 쿠츄…푸, 후아」
-					DATAFORM 「…좀 더, 하자?」
+					DATA 「우웅, 쥬루릅, 쿠츄…푸, 후아」
+					DATA 「…좀 더, 하자?」
 				ENDLIST
 			ENDDATA
 		ELSEIF TALENT:사모
 			PRINTDATAW
 				DATALIST
-					DATAFORM 「우, 후으응, 응…츄우-」
-					DATAFORM 「응? 만족했어? 그럼 뭐…」
+					DATA 「우, 후으응, 응…츄우-」
+					DATA 「응? 만족했어? 그럼 뭐…」
 				ENDLIST
 			ENDDATA
 		ENDIF

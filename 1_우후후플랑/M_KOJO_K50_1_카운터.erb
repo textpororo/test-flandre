@@ -13,9 +13,9 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_1_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_1_1
 IF TALENT:연모
-	PRINTFORML 「가까이 붙어있다니, 그렇지 않은 걸」
+	PRINTL 「가까이 붙어있다니, 그렇지 않은 걸?」
 	IF TALENT:연인
-		PRINTFORML 「앞으로 함께 있어 주는 거지? 그러니 이 정도 쯤이야~」
+		PRINTL 「앞으로 함께 있어 주는 거지? 그러니 이 정도 쯤이야~」
 	ENDIF
 ENDIF
 RETURN 1
@@ -29,10 +29,10 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_2_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_2_1
 IF TALENT:연인
-	PRINTFORML 「뭘 하고있든 자꾸만 %CALLNAME:MASTER%한테 눈이 가」
-	PRINTFORML 「……좋아한다는 기분을 억누르지 못 하는 거려나」
+	PRINTFORML 「뭘 하고있든 자꾸만 %CALLNAME:MASTER%한테 눈이 가.」
+	PRINTL 「……좋아한다는 기분을 억누르지 못 하는 거려나…」
 ELSEIF TALENT:연모
-	PRINTFORML 「왜 눈앞에 아른거려 보이지? 아무리 생각해도 모르겠어」
+	PRINTL (왜 눈앞에 아른거려 보이지? 아무리 생각해도 모르겠어……)
 ENDIF
 RETURN 1
 
@@ -46,9 +46,9 @@ RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_3_1
 IF TALENT:연인
 	PRINTFORML 「%CALLNAME:MASTER%에 대해서 좀 더 알고싶으니」
-	PRINTFORML 「이야기 또 들려주지 않을래?」
+	PRINTL 「이야기 또 들려주지 않을래?」
 ELSEIF TALENT:연모
-	PRINTFORML 「난 평소엔 계속 지하에만 있으니까」
+	PRINTL 「난 평소엔 계속 지하에만 있으니까」
 	PRINTFORML 「%CALLNAME:MASTER%의 이야기를 듣고싶어」
 ENDIF
 RETURN 1
@@ -63,12 +63,12 @@ RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_4_1
 IF TALENT:연인
 	PRINTFORML 「%조사처리(CALLNAME:MASTER, "는")% 내 냄새가 좋다곤 하지만」
-	PRINTFORML 「항상 같은 냄새인 건 아니니까, 오늘도 %CALLNAME:MASTER%가 좋아하는 냄새일지 또 어떨지 모르는데…」
+	PRINTFORML 「항상 같은 냄새인 건 아니니까, 오늘도 %조사처리(CALLNAME:MASTER, "가")% 좋아하는 냄새일지 또 어떨지 모르는데…」
 	PRINTFORML 「그러니, 한번 맡아봐. %조사처리(CALLNAME:MASTER, "가")% 좋아하는 향이 맞는지 확인해주는 거야?」
 ELSEIF TALENT:연모
 	PRINTFORML 「%조사처리(CALLNAME:MASTER, "는")% 어떤 향수가 좋아?」
 	PRINTFORML 「ㄴ, 내 냄새가 좋다고?」
-	PRINTFORML 「뭔가…되게 쑥스럽네」
+	PRINTFORML 「뭔가… 되게 쑥스러워……」
 ENDIF
 RETURN 1
 
@@ -84,10 +84,10 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_11_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_11_1
 IF TALENT:연인
-	PRINTFORML 「연인이니까, %CALLNAME:MASTER% 옆엔 내가 있어야겠지?」
-	PRINTFORML 아무래도 다른 누군가가 있었다면 분신을 써서라도 양옆을 차지했을게 분명하다……
+	PRINTL 「연인이니까, %CALLNAME:MASTER% 옆엔 내가 있어야겠지?」
+	PRINTDL 아무래도 다른 누군가가 있었다면 분신을 써서라도 양옆을 차지했을게 분명하다……
 ELSEIF TALENT:연모
-	PRINTFORML 「%CALLNAME:MASTER%옆에 있어도, 되는 거지?」
+	PRINTL 「%CALLNAME:MASTER%옆에 있어도, 되는 거지?」
 ENDIF
 RETURN 1
 
@@ -100,10 +100,10 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_12_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_12_1
 IF TALENT:연모
-	PRINTFORML 무슨 일이 있길래 그리 기분 좋은지, 당신을 보며 웃고 있는 플랑에게 물어본다.
-	PRINTFORML 「당신이 옆에 있는게 좋아서……라던가 좀 부끄럽네」
+	PRINTDL 무슨 일이 있길래 그리 기분 좋은지, 당신을 보며 웃고 있는 플랑에게 물어본다.
+	PRINTL 「당신이 옆에 있는게 좋아서……라던가 좀 부끄럽네」
 	IF TALENT:연인
-		PRINTFORML 「나 스스로도, 입꼬리가 올라가버리는 건 알아」
+		PRINTL 「나 스스로도, 입꼬리가 올라가버리는 건 알아」
 	ELSE
 		PRINTFORML 「나 왜 이럴까, %CALLNAME:MASTER%?」
 	ENDIF
@@ -119,12 +119,12 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_13_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_13_1
 IF TALENT:연인
-	PRINTFORML 플랑에게 옷자락을 잡아당겨졌다.
+	PRINTDL 플랑에게 옷자락을 잡아당겨졌다.
 	PRINTFORML 「%CALLNAME:MASTER%의 연인은 나, 플랑드르 스칼렛, 맞지?」
 	PRINTFORML 「나를 잔뜩 사랑해줘... 연인이니까 %CALLNAME:MASTER%에게 이쁨받아도 되는 거지?
 ELSEIF TALENT:연모
 	PRINTFORML 플랑이 %CALLNAME:MASTER%의 옷자락에 손을 뻗어 늘어뜨리곤, 곧 바로 멈췄다.
-	PRINTFORML 이렇게까지 어리광피워도 되는 걸까 고민하는 듯 하다.
+	PRINTDL 이렇게까지 어리광피워도 되는 걸까 고민하는 듯 하다.
 ENDIF
 RETURN 1
 
@@ -139,10 +139,10 @@ RETURN RESULT
 IF TALENT:연모
 	PRINTFORML 「%CALLNAME:MASTER%의 품은 따뜻하네~」
 	IF TALENT:연인
-		PRINTFORML 「나도, %CALLNAME:MASTER%을(를) 따뜻하게 해줄 수 있으려나?」
-		PRINTFORML 플랑은 당신의 품에 꾹 눌려 온기를 전하고 있다.
+		PRINTFORML 「나도, %조사처리(CALLNAME:MASTER,"를")% 따뜻하게 해줄 수 있으려나?」
+		PRINTDL 플랑은 당신의 품에 꾹 눌려 온기를 전하고 있다.
 	ELSE
-	    PRINTFORML 플랑은 마치 고양이가 자기 소유라고 냄새를 묻히듯이 %CALLNAME:MASTER%의 품에 몸을 이리저리 비벼대고 있다.
+	    PRINTDL 플랑은 마치 고양이가 자기 소유라고 냄새를 묻히듯이 %CALLNAME:MASTER%의 품에 몸을 이리저리 비벼대고 있다.
 	ENDIF
 ENDIF
 RETURN 1
@@ -156,9 +156,10 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_15_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_15_1
 IF TALENT:연모
-	PRINTFORML 플랑은 행복해보이는 얼굴로 %CALLNAME:MASTER%을(를) 응시하고 있다.
+	PRINTFORMDL 플랑은 행복해보이는 얼굴로 %조사처리(CALLNAME:MASTER,"를")% 응시하고 있다.
 	IF TALENT:연인
-		PRINTFORML 「좋아하는 사람의 얼굴이니까 보고있음 싫증이 안 나」
+		PRINTL 「보고만 있는데도 기뻐 보인다고?」
+		PRINTL 「그야, 좋아하는 사람의 얼굴이잖아. 보고만 있어도 싫증이 안 나는 걸?」
 	ENDIF
 ENDIF
 RETURN 1
@@ -172,11 +173,11 @@ CALL M_KOJO_ふらん_MESSAGE_COUNTER_K50_16_1
 RETURN RESULT
 @M_KOJO_ふらん_MESSAGE_COUNTER_K50_16_1
 IF TALENT:연인
-	PRINTFORML 「으응~, 왜일까. 유독 안심돼」
+	PRINTL 「으응~, 왜일까. 유독 안심돼.」
 	PRINTFORML 「옆에 %CALLNAME:MASTER%의 얼굴이 있는게, 무척이나.」
 ELSEIF TALENT:연모
-	PRINTFORML 「웅ー 이거 생각보다 좋을지도」
-	PRINTFORML 그렇게 말하곤 일부러 몸이 뜰 때까지 어깨에 턱을 올리고 있다.
+	PRINTL 「웅ー 이거 생각보다 좋을지도」
+	PRINTDL 그렇게 말하곤 일부러 몸이 뜰 때까지 어깨에 턱을 올리고 있다.
 ENDIF
 RETURN 1
 
